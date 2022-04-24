@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/working/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Working - Grape Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Working";
+        var mkdocs_page_input_path = "working.md";
+        var mkdocs_page_url = "/working/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Grape Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Working</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#on-boarding-to-dev-team">On boarding to dev team</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tools-we-use">Tools we use</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#task-assignation">Task Assignation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#submitting-and-closing-tasks">Submitting and Closing Tasks</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#code-standarization">Code standarization</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#standard-angular-ui">Standard Angular UI</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#search-module">Search Module</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#asociated-lists">Asociated Lists</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cu-components">CU Components</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#stepper-ui">Stepper UI</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#automplete">Automplete</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#standard-backend-crud-operations">Standard Backend CRUD operations</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#search">SEARCH</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#get">GET</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#post">POST</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#put">PUT</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#delete">DELETE</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#autocomplete">AUTOCOMPLETE</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#coding-good-practices">Coding good practices</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#api-comments">API Comments</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#swagger">Swagger</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#vs-code-configuration">Vs Code Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#c">C</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#angular">Angular</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#commit-message-format"> Commit Message Format</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#commit-message-header">Commit Message Header</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#type">Type</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Grape Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Working</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="working-on-grape-projects">Working on Grape Projects</h1>
+<h2 id="on-boarding-to-dev-team">On boarding to dev team</h2>
+<p>Before a dev can work with Grape Projects should be enable in our Tools. For that reason we need to send and email to admin@grape.com.ar with the following information:</p>
+<ul>
+<li>Mail to add in Dev Ops</li>
+<li>Github Account to add in repos</li>
+<li>Sign <a href="../nda.docx">NDA</a></li>
+<li>Defines role in Dev Team (Frontend, Mobile, Backend, UX Designer or Full stack)</li>
+</ul>
+<h2 id="tools-we-use">Tools we use</h2>
+<p>We use Azure DevOps Boards for daily task, user stories or features, It's help us to define priorities on all differents projects.</p>
+<p>Our source code is in Github private repos. We have differents Organizations for main projects or customers and inside each Organization we work on his specific repos.</p>
+<p>We code mainly with vs code and azure data studio. Also, in some cases we use visual studio for older project in asp.net or wpf for windows.</p>
+<h2 id="task-assignation">Task Assignation</h2>
+<p>We usually meet daily in the morning to assign task and define priorities for a day or two.
+Task are assingned in DevOps with estimated hours, if for some reason task is taking more than estimation time developer should notify user story responsable and wait for an answer working in another task.
+When description of task is confuse or incomplete dev could start a work item discussion with user story responsable or other team member to clarify.
+Once a dev has correct specification and task understanding must activate task so others team members knows this task is taken.</p>
+<p>To start working in code dev should start a branch asociated with is user, work item id and some short description. ie: fruizar/144-improve-import. Mainly base branch colud be dev but in some cases when a fix is needed on production environment main o master branch should be use as base, in that case PR should be done to main and dev.</p>
+<h2 id="submitting-and-closing-tasks">Submitting and Closing Tasks</h2>
+<p>After task is done following Coding standarizations and good practices dev should close task indicating Completed time hours in work item. If some consideration about task execution is needed dev should write it in work item discussion.</p>
+<p>Dev also need to make a pull request in Github indication who must Review the code, usually is user story responsable or team leader. In PR description Work item URL should be write and other considerations dev wants to tell reviewer.</p>
+<h2 id="code-standarization">Code standarization</h2>
+<p>Grape has snippets for most common user stories on differents languages, dev should install it from https://github.com/grape-software/docs/tree/main/snippets and use it when starting a standar task.
+Dev could improve this snippets modyfing or adding new ones, all should start with gr-en-DESCRIPTION, making a Pull Request in docs repository.</p>
+<h3 id="standard-angular-ui">Standard Angular UI</h3>
+<h4 id="search-module">Search Module</h4>
+<p>Is used like a menu where user can work with some part of business making most common operations:</p>
+<ul>
+<li>Search with filters or advances filters</li>
+<li>Add, edit or remove</li>
+<li>Export or Import</li>
+<li>Defines record by page</li>
+<li>Order results</li>
+<li>Access to related lists</li>
+<li>View resume information en footer</li>
+<li>Make some business specific actions</li>
+</ul>
+<p>Add or edit operations could be on Popup, when little inputs needs to be fill, or with navigation in other case.
+Remove operations are confirmed in Popup in same search screen.</p>
+<h4 id="asociated-lists">Asociated Lists</h4>
+<p>User access some part of business throw search module and then needs to work with related records ie. Headers and Details objects. This UI try to solve operations related with asociated list of object business. User could:</p>
+<ul>
+<li>View Header with Parent Record Resume Information and back icon</li>
+<li>See paged list</li>
+<li>Defines record by page</li>
+<li>Order results</li>
+<li>Add, edit or remove</li>
+<li>Make some business specific actions</li>
+</ul>
+<p>Add, edit and remove operations are in Popup in this UI unless specified differently in the task.</p>
+<h4 id="cu-components">CU Components</h4>
+<p>Create or Update Components are Form Angular components that allows to add or edit a database record in some cases with a complex transaction that writes in multiple entities.</p>
+<p>Must have client simple domain logic validation for each input. ie. max, number, dates, select validations. Raising user friendly backend messages.</p>
+<h4 id="stepper-ui">Stepper UI</h4>
+<p>Stepper allows complex transactions to be made in simple steps for the user and send a whole transactions POST to backend. Step component could be in own stepper or a reusing existing component.</p>
+<h4 id="automplete">Automplete</h4>
+<p>Each time a user needs to select a record with a big number of records or with multi attributes to look for should be implemented as a autocomplete component for reuse.
+This component has only input in html and binding a calculate field calls fullName implemented in Class to search for as Not Mapped.</p>
+<h3 id="standard-backend-crud-operations">Standard Backend CRUD operations</h3>
+<h4 id="search">SEARCH</h4>
+<p>Allows to make searchs for Search UI with common filters implemented in searchText, custom based specific attribute for custom SearchX class inherited from SearchModel. Set number of records for page and order by any object attribute. Implements onlyActive attribute to get active records in each business model.</p>
+<p>Returns a dynamic object with totalCount with all records, res array with a list of business object to search for and a search object with all attributes passed to search API. API is /{controller}</p>
+<p>C# Snippet gr-en-search</p>
+<h4 id="get">GET</h4>
+<p>Allows to make a get for an specific business object with all his first level related entities and in some cases including more than first level.</p>
+<p>Returns all attributes of business object with included entities. API is /{controller}/{id}</p>
+<p>C# Snippet gr-en-get-id</p>
+<h4 id="post">POST</h4>
+<p>Allows to make a call to insert a record o a record with related in one transaction to the database. All business validation to get consistency should be done in this method.</p>
+<p>C# Snippet gr-en-post</p>
+<h4 id="put">PUT</h4>
+<p>Allows to make a call to insert a record o a record with related in one transaction to the database. All business validation to get consistency should be done in this method.
+Working with Audits component changes should be done with</p>
+<pre><code>db.Entry(oldObject).CurrentValues.SetValues(record);
+</code></pre>
+<p>C# Snippet gr-en-put</p>
+<h4 id="delete">DELETE</h4>
+<p>Deletes remove entity from database, some business use cases should implement logical deleted with an database update instead phisically delete record.
+In some cases it must record to trash table whole object in json format.</p>
+<p>C# Sinppet gr-en-delete</p>
+<h4 id="autocomplete">AUTOCOMPLETE</h4>
+<p>Search in database for automplete typeahead input objects and should returns fullName (calculated not mapped field) and business primary key.</p>
+<p>C# Snippet gr-en-autocomplete</p>
+<h2 id="coding-good-practices">Coding good practices</h2>
+<h3 id="api-comments">API Comments</h3>
+<p>Should explain what API does and what validation it have.</p>
+<h3 id="swagger">Swagger</h3>
+<p>All public method should be marked as [ApiExplorerSettings(IgnoreApi = true)] to work with swagger.
+Before push code backend /docs must be checked in order to validate OpenAPI docs is working.</p>
+<h2 id="vs-code-configuration">Vs Code Configuration</h2>
+<h3 id="c">C</h3>
+<p>Format on Save
+Lint?
+Extensions:</p>
+<ul>
+<li>Omnisharp C#</li>
+<li>C# xml Documentation Comments (Keisuke Kato)</li>
+<li>RestClient (Huachao Mao)</li>
+</ul>
+<h3 id="angular">Angular</h3>
+<p>Format on Save
+Extensions:</p>
+<ul>
+<li>Angular Essentials (Jhon Papa)</li>
+<li>Angular Lanfuage Service</li>
+<li>Prettier</li>
+<li>ESLint</li>
+<li>sort-imports (VSC Sort Import)</li>
+</ul>
+<h2 id="commit-message-format"><a name="commit"></a> Commit Message Format</h2>
+<p>https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-format
+<em>This specification is inspired by and supersedes the [AngularJS commit message format][commit-message-format].</em></p>
+<p>We have very precise rules over how our Git commit messages must be formatted.
+This format leads to <strong>easier to read commit history</strong>.</p>
+<p>Each commit message consists of a <strong>header</strong>, a <strong>body</strong>, and a <strong>footer</strong>.</p>
+<pre><code>&lt;header&gt;
+&lt;BLANK LINE&gt;
+&lt;body&gt;
+&lt;BLANK LINE&gt;
+&lt;footer&gt;
+</code></pre>
+<p>The <code>header</code> is mandatory and must conform to the <a href="#commit-header">Commit Message Header</a> format.</p>
+<p>The <code>body</code> is mandatory for all commits except for those of type "docs".
+When the body is present it must be at least 20 characters long and must conform to the <a href="#commit-body">Commit Message Body</a> format.</p>
+<p>The <code>footer</code> is optional. The <a href="#commit-footer">Commit Message Footer</a> format describes what the footer is used for and the structure it must have.</p>
+<h4 id="commit-message-header"><a name="commit-header"></a>Commit Message Header</h4>
+<pre><code>&lt;type&gt;(&lt;scope&gt;): &lt;short summary&gt;
+  │       │             │
+  │       │             └─⫸ Summary in present tense. Not capitalized. No period at the end.
+  │       │
+  │       └─⫸ Commit Scope: animations|bazel|benchpress|common|compiler|compiler-cli|core|
+  │                          elements|forms|http|language-service|localize|platform-browser|
+  │                          platform-browser-dynamic|platform-server|router|service-worker|
+  │                          upgrade|zone.js|packaging|changelog|docs-infra|migrations|ngcc|ve|
+  │                          devtools
+  │
+  └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|test
+</code></pre>
+<p>The <code>&lt;type&gt;</code> and <code>&lt;summary&gt;</code> fields are mandatory, the <code>(&lt;scope&gt;)</code> field is optional.</p>
+<h5 id="type">Type</h5>
+<p>Must be one of the following:</p>
+<ul>
+<li><strong>build</strong>: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)</li>
+<li><strong>ci</strong>: Changes to our CI configuration files and scripts (examples: CircleCi, SauceLabs)</li>
+<li><strong>docs</strong>: Documentation only changes</li>
+<li><strong>feat</strong>: A new feature</li>
+<li><strong>fix</strong>: A bug fix</li>
+<li><strong>perf</strong>: A code change that improves performance</li>
+<li><strong>refactor</strong>: A code change that neither fixes a bug nor adds a feature</li>
+<li><strong>test</strong>: Adding missing tests or correcting existing tests</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
