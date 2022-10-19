@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/http-services/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>External Services - Grape Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "External Services";
+        var mkdocs_page_input_path = "http-services.md";
+        var mkdocs_page_url = "/http-services/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Grape Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../working/">Working</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../semantic-release/">Releasing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../logs/">Logs</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../autocomplete/">Autocomplete</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../b4to5/">Bootstrap 4 to 5</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">External Services</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#startup-or-program">Startup or Program</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#http-service-sdk">Http Service SDK</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#controllers">Controllers</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../linter/">Linter Config</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../microfronts/">Microfronts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../schema-compare/">Schema Compare</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Grape Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>External Services</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="calling-external-rest">Calling external REST</h1>
+<p>In each Microservice some times calling others REST is needed. In that case this are the steps to implement this kind of calls.</p>
+<h2 id="startup-or-program">Startup or Program</h2>
+<p>Simple version is not using a custom handler to intercept HTTP Calls in this case this is the code.</p>
+<pre><code>services.AddHttpClient&lt;SimpleRouteService&gt;();
+</code></pre>
+<p>LoginHandler is not needed, only should exists if for some reason use case need to log or define some general params, or for debug. This code should be replace with correct params.</p>
+<pre><code>services.AddTransient&lt;LoggingHandler&gt;();
+services.AddHttpClient&lt;SimpleRouteService&gt;()
+// Only if capture each request is required as Angular Interceptor
+.AddHttpMessageHandler&lt;LoggingHandler&gt;();
+</code></pre>
+<p>If token integration is fixed it should be record in database SystemIntegrations and token params should be get from there, same as URL. This params should be added in service constructor.</p>
+<p>Class LoggingHandler is needed, you must copy it from other microservice.</p>
+<h2 id="http-service-sdk">Http Service SDK</h2>
+<p>Each service should be implemented throw a user class with this format.</p>
+<pre><code>public class SimpleRouteService
+{
+    private readonly HttpClient _httpClient;
+    private readonly AppDBContext db;
+    /// &lt;summary&gt;
+    /// Constructor is executing only once when app starts
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;httpClient&quot;&gt;&lt;/param&gt;
+    /// &lt;param name=&quot;httpContextAccessor&quot;&gt;&lt;/param&gt;
+    public SimpleRouteService(HttpClient httpClient, IHttpContextAccessor httpContextAccessor, AppDBContext context)
+    {
+        db = context;
+        _httpClient = httpClient;
+
+        var integrations = GetOrCreateSystemIntegration(&quot;SimpleRoute&quot;).Result;
+        httpClient.BaseAddress = new Uri(integrations.UrlLogin);
+        // Get params from database SystemIntegrations
+        httpClient.DefaultRequestHeaders.Authorization
+                    = new AuthenticationHeaderValue(&quot;Token&quot;, integrations.Token);
+        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(&quot;application/json&quot;));
+    }
+    public async Task&lt;dynamic&gt; GetMe()
+    {
+        var responseString = await _httpClient.GetStringAsync(&quot;/v1/accounts/me/&quot;);
+
+        var res = JsonConvert.DeserializeObject&lt;dynamic&gt;(responseString);
+        return res;
+    }
+    private async Task&lt;SystemIntegration&gt; GetOrCreateSystemIntegration(string appName)
+    {
+        var integration = await db.SystemsIntegrations.FirstOrDefaultAsync(x=&gt;x.AppName == appName);
+        if(integration == null)
+        {
+            integration = new SystemIntegration{
+                AppName = appName,
+                Token = &quot;XXXXXXX&quot;,
+                Protocol = &quot;apikey&quot;,
+                Active = true,
+                UrlLogin = &quot;https://api.simpliroute.com/&quot;,
+            };
+            await db.SystemsIntegrations.AddAsync(integration);
+            await db.SaveChangesAsync();
+        }
+        return integration;
+    }
+}
+</code></pre>
+<p>Developer should implement each method and each class used in this file.</p>
+<h2 id="controllers">Controllers</h2>
+<p>Where is need to call external REST this code should be write.</p>
+<pre><code>protected readonly SimpleRouteService _routeClient;
+</code></pre>
+<p>And in constructor </p>
+<pre><code>public PedidosController(AppDBContext context, SimpleRouteService route) : base(context)
+{
+    _routeClient = route;
+}
+
+</code></pre>
+<p>Then each time a call is needed a private object is available in controller.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../b4to5/" class="btn btn-neutral float-left" title="Bootstrap 4 to 5"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../linter/" class="btn btn-neutral float-right" title="Linter Config">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../b4to5/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../linter/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

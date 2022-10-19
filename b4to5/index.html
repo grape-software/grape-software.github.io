@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/hidden/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/b4to5/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Github Pages configuring - Grape Docs</title>
+    <title>Bootstrap 4 to 5 - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Github Pages configuring";
-        var mkdocs_page_input_path = "hidden.md";
-        var mkdocs_page_url = "/hidden/";
+        var mkdocs_page_name = "Bootstrap 4 to 5";
+        var mkdocs_page_input_path = "b4to5.md";
+        var mkdocs_page_url = "/b4to5/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -49,6 +49,44 @@
                 <li class="toctree-l1"><a class="reference internal" href="../working/">Working</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../semantic-release/">Releasing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../logs/">Logs</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../autocomplete/">Autocomplete</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Bootstrap 4 to 5</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#buscador">buscador</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#abm">ABM</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../http-services/">External Services</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../linter/">Linter Config</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../microfronts/">Microfronts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../schema-compare/">Schema Compare</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -62,7 +100,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Github Pages configuring</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Bootstrap 4 to 5</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -72,18 +110,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="github-pages-configuring">Github Pages configuring</h1>
-<p>git submodule add -b main https://github.com/grape-software/grape-software.github.io.git
-git add grape-software.github.io
-git commit -m "add github page submodule"
-git push</p>
-<h1 id="build-or-update">Build or update</h1>
-<p>Execute in grape-software.github.io folder</p>
-<pre><code>mkdocs gh-deploy --config-file ../mkdocs.yml --remote-branch main
-</code></pre>
+                <h1 id="bootstrap-4-to-5-migration">Bootstrap 4 to 5 migration</h1>
+<p>replace on HTML</p>
+<h2 id="buscador">buscador</h2>
+<ol>
+<li>d-flex justify-content-between input-group x d-flex justify-content-between</li>
+<li>float-right x float-end</li>
+<li>badge badge-info x badge text-bg-info</li>
+<li>selects -&gt; form-control x</li>
+<li>checkbox -&gt; se agrega en el input class="form-check-input"</li>
+<li>modals -&gt; close pull-right x btn-close, modal-title pull-left x modal-title, quitar <span aria-hidden="true">&times;</span></li>
+</ol>
+<h2 id="abm">ABM</h2>
+<ol>
+<li>row flex-row-reverse mt-4 x d-flex flex-row-reverse mt-4</li>
+<li>mr-2 x me-2 (así con todos los m se reemplaza rxe y lxs)</li>
+</ol>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../autocomplete/" class="btn btn-neutral float-left" title="Autocomplete"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../http-services/" class="btn btn-neutral float-right" title="External Services">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -105,6 +154,10 @@ git push</p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../autocomplete/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../http-services/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

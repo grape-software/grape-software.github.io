@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/microfronts/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Microfronts - Grape Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Microfronts";
+        var mkdocs_page_input_path = "microfronts.md";
+        var mkdocs_page_url = "/microfronts/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Grape Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../working/">Working</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../semantic-release/">Releasing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../logs/">Logs</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../autocomplete/">Autocomplete</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../b4to5/">Bootstrap 4 to 5</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../http-services/">External Services</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../linter/">Linter Config</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Microfronts</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../schema-compare/">Schema Compare</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Grape Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Microfronts</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="add-new-micro-front">Add new micro front</h2>
+<p>copy auth.guard</p>
+<p>ng new MF
+setup linter</p>
+<p>ng add @angular-architects/module-federation
+ng g m MODULENAME</p>
+<p>ng g c ventas/pedidos/pedidos-search --skip-tests --inline-style --flat</p>
+<h2 id="maints-en-layout">Main.ts en Layout</h2>
+<p>´´´´
+import { loadManifest } from '@angular-architects/module-federation';</p>
+<p>loadManifest('/assets/mf.manifest.json')
+.catch((err) =&gt; console.error(err))
+.then((_) =&gt; import('./bootstrap'))
+.catch((err) =&gt; console.error(err));</p>
+<p>´´´´</p>
+<h2 id="exposes-data-from-microfront-webpackconfigjs">Exposes data from microfront webpack.config.js</h2>
+<p>´´´´
+const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');</p>
+<p>module.exports = withModuleFederationPlugin({</p>
+<p>name: 'mfe1',</p>
+<p>exposes: {
+// Adjusted line:
+'./Module': './projects/mfe1/src/app/flights/flights.module.ts'
+},</p>
+<p>shared: {
+...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+},</p>
+<p>});
+´´´´</p>
+<h1 id="componentes-standalone">Componentes StandAlone</h1>
+<p>Primero hay que definirlos en el proyecto de angular como:
+´´´´
+@Component({
+selector: 'app-pedidos',
+standalone: true, &lt;---- ESTO ES IMPORTANTE
+templateUrl: './pedidos.component.html',
+styleUrls: ['./pedidos.component.scss']
+})
+´´´´
+Luego no se definen como declarations en app.module.ts
+se exponene así:
+´´´´
+exposes: {
+// "./routes": "./src/app/ventas.routes.ts",</p>
+<pre><code>'./Module': './src/app/ventas/ventas.module.ts',
+'./Component': './src/app/pedidos/pedidos.component.ts',
+</code></pre>
+<p>},
+´´´´</p>
+<p>En el shell se declaran en el manifest como:
+´´´´
+"pedidos": {
+"remoteEntry": "http://localhost:4201/remoteEntry.js",
+"exposedModule": "./Component",
+"displayName": "pedidos",
+"routePath": "pedidos"
+}
+´´´´
+Se cargan como ruta así
+´´´´
+{
+path: 'pedidos',
+loadComponent: () =&gt;
+loadRemoteModule({
+type: 'module',
+remoteEntry: 'http://localhost:4201/remoteEntry.js',
+exposedModule: './Component',
+}).then((m) =&gt; m.PedidosComponent),
+},</p>
+<p>´´´´</p>
+<h1 id="incluir-modulos-completos">Incluir Módulos completos</h1>
+<p>Crear el módulo en el proyecto
+Agregar los routes como childs en la definción del modulo
+´´´´
+imports: [
+CommonModule,
+RouterModule.forChild(VENTAS_ROUTES)
+]
+´´´´
+Se exponene así en el webpack:
+´´´´
+exposes: {
+// "./routes": "./src/app/ventas.routes.ts",</p>
+<pre><code>'./Module': './src/app/ventas/ventas.module.ts',
+'./Component': './src/app/pedidos/pedidos.component.ts',
+</code></pre>
+<p>},</p>
+<p>En algún proyecto con Angular 14 me tiro que no estaba compilado el módulo, que debía incluirlo en tsconfig.app.json como se muestra abajo.
+´´´´
+"include": ["src/<strong>/*.d.ts", "</strong>/app/ventas/*<em>/</em>.ts"]
+´´´´</p>
+<h2 id="en-el-shell">en el shell</h2>
+<p>´´´´
+Se levantan así en el manifest:
+´´´´
+"admin": {
+"remoteEntry": "http://localhost:4201/remoteEntry.js",
+"exposedModule": "./Module",
+"displayName": "ventasApp",
+"routePath": "pedidos",
+"ngModuleName": "VentasModule"
+},
+´´´´
+Se importan las rutas:
+´´´´
+{
+path: 'ventas',
+loadChildren: () =&gt;
+loadRemoteModule({
+type: 'manifest',
+remoteName: 'admin', // name in manifest json
+exposedModule: './Module',
+}).then((m) =&gt; m.VentasModule),
+},
+´´´´</p>
+<h1 id="componentes-para-migrar-funcionalidad-de-neox">Componentes para migrar funcionalidad de Neox</h1>
+<ol>
+<li>Bootstrap (npm i bootstrap) -&gt; Compartido en webpack</li>
+<li>ngx-toastr (npm i ngx-toastr) -&gt; Compartido en webpack</li>
+<li>jquery (npm i jquery) -&gt; Compartido en webpack</li>
+<li>ngx-bootstrap (npm i ngx-bootstrap) -&gt; Compartido en webpack</li>
+<li>fontawesome icons (npm i @fortawesome/angular-fontawesome, npm i @fortawesome/free-solid-svg-icons)</li>
+<li>pagination (mpm i ngx-pagination)</li>
+<li>Popper dropdowns (npm i @popperjs/core)</li>
+<li>Tabs (npm i)</li>
+</ol>
+<h2 id="migrando">Migrando</h2>
+<p>Crear los componentes en el proyecto
+Copiar y pegar el HTML
+Copiar y pegar el TS
+Pasar los servicios</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../linter/" class="btn btn-neutral float-left" title="Linter Config"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../schema-compare/" class="btn btn-neutral float-right" title="Schema Compare">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../linter/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../schema-compare/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

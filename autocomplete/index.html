@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/semantic-release/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/autocomplete/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Releasing - Grape Docs</title>
+    <title>Autocomplete - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Releasing";
-        var mkdocs_page_input_path = "semantic-release.md";
-        var mkdocs_page_url = "/semantic-release/";
+        var mkdocs_page_name = "Autocomplete";
+        var mkdocs_page_input_path = "autocomplete.md";
+        var mkdocs_page_url = "/autocomplete/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -49,24 +49,22 @@
                 <li class="toctree-l1"><a class="reference internal" href="../working/">Working</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Releasing</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#project-specifications">Project specifications</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#c-backend-projects">C# backend projects</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../semantic-release/">Releasing</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../logs/">Logs</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../autocomplete/">Autocomplete</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Autocomplete</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#html">Html</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ts">TS</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -102,7 +100,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Releasing</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Autocomplete</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -112,80 +110,87 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="grape-use-of-semantic-release">Grape use of Semantic Release</h1>
-<p>All developers should use this specifications.</p>
-<h2 id="project-specifications">Project specifications</h2>
-<h3 id="c-backend-projects">C# backend projects</h3>
-<p>In .csproj this code should be defined in <PropertyGroup>
-<code>```
-  &lt;VersionPrefix&gt;1.0.0&lt;/VersionPrefix&gt;
-  &lt;VersionSuffix&gt;$([System.DateTime]::UtcNow.ToString(</code>yyyyMMdd-HHmm`))</VersionSuffix></p>
-<pre><code>
-## &lt;a name=&quot;commit&quot;&gt;&lt;/a&gt; Commit Message Format
+                <h1 id="how-to-implement-angular-autocomplete">How to implement Angular Autocomplete</h1>
+<h2 id="html">Html</h2>
+<p>Component Code</p>
+<pre><code>&lt;input
+  type=&quot;search&quot;
+  autocomplete=&quot;off&quot;
+  typeaheadOptionField=&quot;fullName&quot;
+  [(ngModel)]=&quot;term&quot;
+  [typeahead]=&quot;suggestions$&quot;
+  [typeaheadAsync]=&quot;true&quot;
+  (typeaheadOnSelect)=&quot;onSelect($event)&quot;
+  [typeaheadWaitMs]=&quot;500&quot;
+  (keyup)=&quot;onKeyUp()&quot;
+  (ngModelChange)=&quot;onKeyUp()&quot;
+  class=&quot;form-control&quot;
+  placeholder=&quot;XXXXX&quot; /&gt;
+</code></pre>
+<h2 id="ts">TS</h2>
+<p>Component Code</p>
+<pre><code>import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import { Observable, Observer, map, noop, of, switchMap, tap } from 'rxjs';
 
-https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-format
-*This specification is inspired by and supersedes the [AngularJS commit message format][commit-message-format].*
+import { HelperService } from '../services/helper.service';
+import { UtilsService } from '../services/utils.service';
 
-We have very precise rules over how our Git commit messages must be formatted.
-This format leads to **easier to read commit history**.
+@Component({
+  selector: 'app-country-autocomplete',
+  templateUrl: './country-autocomplete.component.html',
+  styles: [],
+})
+export class CountryAutocompleteComponent implements OnInit {
+  @Input() term: string = '';
+  @Input() selected: any = {};
+  @Output() selectedChange = new EventEmitter();
+  working = false;
+  suggestions$: Observable&lt;any[]&gt;;
 
-Each commit message consists of a **header**, a **body**, and a **footer**.
+  constructor(private baseServices: UtilsService, private helpers: HelperService) {}
 
+  ngOnInit(): void {
+    this.suggestions$ = new Observable((observer: Observer&lt;any&gt;) =&gt; {
+      observer.next(this.term);
+    }).pipe(
+      switchMap((query: string) =&gt; {
+        if (query) {
+          return this.baseServices.searchCountriesAutocomplete({ searchText: query }).pipe(
+            map((data: any) =&gt; (data &amp;&amp; data) || []),
+            tap({
+              next: () =&gt; noop,
+              error: (e) =&gt; {
+                // in case of http error
+                this.helpers.RaiseNotification('danger', 'Error', e.error ?? e.message);
+              },
+            }),
+          );
+        }
+        return of([]);
+      }),
+    );
+  }
+  onKeyUp(): void {
+    if (this.term?.length === 0) {
+      this.selected = null;
+      this.selectedChange.emit('');
+    }
+  }
+
+  onSelect(event: TypeaheadMatch): void {
+    this.selected = event.item;
+    this.selectedChange.emit(this.selected.countriesID);
+  }
+}
 
 </code></pre>
-<header>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
-
-<pre><code>
-The `header` is mandatory and must conform to the [Commit Message Header](#commit-header) format.
-
-The `body` is mandatory for all commits except for those of type &quot;docs&quot;.
-When the body is present it must be at least 20 characters long and must conform to the [Commit Message Body](#commit-body) format.
-
-The `footer` is optional. The [Commit Message Footer](#commit-footer) format describes what the footer is used for and the structure it must have.
-
-
-#### &lt;a name=&quot;commit-header&quot;&gt;&lt;/a&gt;Commit Message Header
-
-</code></pre>
-
-<type>(<scope>): <short summary>
-  │       │             │
-  │       │             └─⫸ Summary in present tense. Not capitalized. No period at the end.
-  │       │
-  │       └─⫸ Commit Scope: animations|bazel|benchpress|common|compiler|compiler-cli|core|
-  │                          elements|forms|http|language-service|localize|platform-browser|
-  │                          platform-browser-dynamic|platform-server|router|service-worker|
-  │                          upgrade|zone.js|packaging|changelog|docs-infra|migrations|ngcc|ve|
-  │                          devtools
-  │
-  └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|test
-```
-
-The `<type>` and `<summary>` fields are mandatory, the `(<scope>)` field is optional.
-
-
-##### Type
-
-Must be one of the following:
-
-* **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-* **ci**: Changes to our CI configuration files and scripts (examples: CircleCi, SauceLabs)
-* **docs**: Documentation only changes
-* **feat**: A new feature
-* **fix**: A bug fix
-* **perf**: A code change that improves performance
-* **refactor**: A code change that neither fixes a bug nor adds a feature
-* **test**: Adding missing tests or correcting existing tests
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../working/" class="btn btn-neutral float-left" title="Working"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../logs/" class="btn btn-neutral float-right" title="Logs">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../logs/" class="btn btn-neutral float-left" title="Logs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../b4to5/" class="btn btn-neutral float-right" title="Bootstrap 4 to 5">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -208,10 +213,10 @@ Must be one of the following:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../working/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../logs/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../logs/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../b4to5/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

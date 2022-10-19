@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/logs/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Logs - Grape Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Logs";
+        var mkdocs_page_input_path = "logs.md";
+        var mkdocs_page_url = "/logs/";
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Grape Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../working/">Working</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../semantic-release/">Releasing</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Logs</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#framework">Framework</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#sql-server-logs">SQL Server Logs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#postgresql-logs">PostgreSQL Logs</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#appsettingsjson">Appsettings.json</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sql-configuration">SQL Configuration</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#enrich-our-logs">Enrich our logs</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#incoming-api-calls">Incoming API calls</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#outcoming-api-calls">Outcoming API calls</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration_1">Configuration</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#net-5">NET 5</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#change-configuration-from-environment-variable">Change configuration from environment variable</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../autocomplete/">Autocomplete</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../b4to5/">Bootstrap 4 to 5</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../http-services/">External Services</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../linter/">Linter Config</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../microfronts/">Microfronts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../schema-compare/">Schema Compare</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Grape Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Logs</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="implementing-backend-logs-in-c">Implementing backend logs in c</h1>
+<h2 id="framework">Framework</h2>
+<p>We use serilog as default framework for our microservices. The package needed are:</p>
+<ul>
+<li>Serilog.AspNetCore</li>
+<li>Serilog.Enrichers.Environment</li>
+<li>Serilog.Exceptions</li>
+<li>Serilog.Exceptions.EntityFrameworkCore</li>
+<li>Serilog.Settings.Configuration</li>
+<li>Serilog.Sinks.Debug</li>
+</ul>
+<h3 id="sql-server-logs">SQL Server Logs</h3>
+<p>For use on SQL Server you need to add this package:</p>
+<ul>
+<li>Serilog.Sinks.MSSqlServer</li>
+</ul>
+<p>You can create a table for each microservice or define only one table and record all logs.</p>
+<h3 id="postgresql-logs">PostgreSQL Logs</h3>
+<p>For use on PostgreSQL you need to add this packages:</p>
+<ul>
+<li>Serilog.Sinks.PostgreSQL</li>
+<li>Serilog.Sinks.PostgreSQL.Configuration</li>
+</ul>
+<h2 id="configuration">Configuration</h2>
+<p>We use configuration on appsettings.json for default or in environment if you need to change some parameter in production to catch a bug.</p>
+<p>We use some aditionals fields to log information for our microservices:</p>
+<ul>
+<li>Elapsed: API call time consumed</li>
+<li>StatusCode: API call status code response</li>
+<li>Version: Compilation version from csproj</li>
+<li>RequestMethod: API call method</li>
+<li>RequestPath: API call endpoint</li>
+<li>Authorization: JWT sended</li>
+<li>Host: API call URL</li>
+<li>Protocol: API call protocol</li>
+<li>Scheme: API call scheme</li>
+</ul>
+<p>The following fields are used to know state of call and it are disabled for default throw SaveLogBodies=true appsettings param:</p>
+<ul>
+<li>QueryString: API call query string with key value information</li>
+<li>RequestBody: API call request body</li>
+<li>ResponseBody: API call response body</li>
+</ul>
+<h3 id="appsettingsjson">Appsettings.json</h3>
+<p>This is an example on how to setup default configuration to log in production.</p>
+<pre><code>&quot;Serilog&quot;: {
+    &quot;MinimumLevel&quot;: {
+      &quot;Default&quot;: &quot;Error&quot;,
+      &quot;Override&quot;: {
+        &quot;Microsoft&quot;: &quot;Error&quot;,
+        &quot;Microsoft.AspNetCore&quot;: &quot;Error&quot;,
+        &quot;Serilog.AspNetCore&quot;: &quot;Error&quot;,
+        &quot;Microsoft.EntityFrameworkCore&quot;:&quot;Error&quot;
+      }
+    }
+</code></pre>
+<p>This is only recording errors on all namespaces and setting some overrides nodes that you can change to get more specific information if error happend or you need to test performance.
+In MinimumLevel Override Each node defines a Namespace and particulary a Log Level to configure. Supouse you need to check time consuming on APIs calls, you can set Serilog.AspNetCore to Information; or maybe you need yo view the query setting Microsoft.EntityFrameworkCore to Information.</p>
+<h3 id="sql-configuration">SQL Configuration</h3>
+<p>This is the default configuration for SQL Server on each microservice project.</p>
+<pre><code>&quot;WriteTo&quot;: [
+      {
+        &quot;Name&quot;: &quot;MSSqlServer&quot;,
+        &quot;Args&quot;: {
+          &quot;connectionString&quot;: &quot;Default&quot;,
+          &quot;tableName&quot;: &quot;Logs&quot;,
+          &quot;autoCreateSqlTable&quot;: true,
+          &quot;logEventFormatter&quot;: &quot;Serilog.Formatting.Compact.CompactJsonFormatter, Serilog.Formatting.Compact&quot;,
+          &quot;removeStandardColumns&quot;: [&quot;Properties&quot;, &quot;MessageTemplate&quot;],
+          &quot;columnOptionsSection&quot;: {
+            &quot;removeStandardColumns&quot;: [&quot;Properties&quot;, &quot;MessageTemplate&quot;],
+            &quot;addStandardColumns&quot;: [&quot;LogEvent&quot;],
+            &quot;logEvent&quot;: {
+              &quot;excludeAdditionalProperties&quot;: true,
+              &quot;excludeStandardColumns&quot;: true
+            },
+            &quot;customColumns&quot;: [
+              {
+                &quot;ColumnName&quot;: &quot;Elapsed&quot;,
+                &quot;DataType&quot;: &quot;float&quot;
+              },
+              {
+                &quot;ColumnName&quot;: &quot;StatusCode&quot;,
+                &quot;DataType&quot;: &quot;int&quot;
+              },
+              {
+                &quot;ColumnName&quot;: &quot;Version&quot;,
+                &quot;DataType&quot;: &quot;varchar&quot;,
+                &quot;DataLength&quot;: 50
+              },
+              {
+                &quot;ColumnName&quot;: &quot;RequestMethod&quot;,
+                &quot;DataType&quot;: &quot;varchar&quot;,
+                &quot;DataLength&quot;: 10
+              },
+              {
+                &quot;ColumnName&quot;: &quot;RequestPath&quot;,
+                &quot;DataType&quot;: &quot;varchar&quot;,
+                &quot;DataLength&quot;: 300
+              },
+              {
+                &quot;ColumnName&quot;: &quot;Authorization&quot;,
+                &quot;DataType&quot;: &quot;varchar&quot;
+              },
+              {
+                &quot;ColumnName&quot;: &quot;Host&quot;,
+                &quot;DataType&quot;: &quot;varchar&quot;
+              },
+              {
+                &quot;ColumnName&quot;: &quot;Protocol&quot;,
+                &quot;DataType&quot;: &quot;varchar&quot;
+              },
+              {
+                &quot;ColumnName&quot;: &quot;Scheme&quot;,
+                &quot;DataType&quot;: &quot;varchar&quot;
+              },
+              {
+                &quot;ColumnName&quot;: &quot;QueryString&quot;,
+                &quot;DataType&quot;: &quot;varchar&quot;
+              },
+              {
+                &quot;ColumnName&quot;: &quot;RequestBody&quot;,
+                &quot;DataType&quot;: &quot;varchar&quot;
+              },
+              {
+                &quot;ColumnName&quot;: &quot;ResponseBody&quot;,
+                &quot;DataType&quot;: &quot;varchar&quot;
+              }
+            ]
+          }
+        }
+      }
+    ]
+</code></pre>
+<p>The key that can be changed here are:</p>
+<ul>
+<li>connectionString: it points to database configuration attribute define in ConnectionStrings node.</li>
+<li>tableName: is the table name where all serillog events are saved. The default is Logs but if you need to change it for debug propouse, you could change this name and save records on other table.</li>
+</ul>
+<h2 id="enrich-our-logs">Enrich our logs</h2>
+<p>There are differents ways to enrich our event with information that help us to know service status.
+We can log incoming calls throw a middleware or throw a custom EnrichFromRequest method. Middleware allows to control in depth request call and method is call before executing request so response data is not available yet.</p>
+<h3 id="incoming-api-calls">Incoming API calls</h3>
+<p>We use a custom middleware ApiLogMiddleware class to enrich our API calls. This allows to get context information and add it to serilog event for recording in database in Invoke method.
+This middleware is set in our startup process and is important the order.</p>
+<pre><code>    app.UseSerilogRequestLogging();
+    app.UseMiddleware&lt;ApiLogMiddleware&gt;();
+</code></pre>
+<p>First we need to setup UseSerilogRequestLogging and second configure ApiLog middleware.</p>
+<h3 id="outcoming-api-calls">Outcoming API calls</h3>
+<p>Also, if you are calling services you need to define an enrich handler when you define service in startup. This are only for external services, our microservices has is own logs methods.</p>
+<pre><code>    services.AddHttpClient&lt;CoreService&gt;(c =&gt;
+    {
+        c.BaseAddress = new Uri(externalserviceURL);
+    }).AddHttpMessageHandler&lt;ServiceHandler&gt;(); // Enrich Log when calling service
+</code></pre>
+<p>For each external call ServiceHandler.SendAsync is call to add event information in out logs.</p>
+<h2 id="configuration_1">Configuration</h2>
+<p>To allow Logs working you need to setup in initialitation flow. Code Depends if you use NET 5 or greater.</p>
+<h3 id="net-5">NET 5</h3>
+<p>Code for NET 5 configuration on program.cs</p>
+<pre><code>        public static void Main(string[] args)
+        {
+            ConfigureLogging();
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =&gt;
+            Host.CreateDefaultBuilder(args)
+                .ConfigureLogging(logging =&gt;
+                {
+                    logging.ClearProviders();
+                    logging.AddConsole();
+                    logging.AddDebug();  //Esto hace que se vea en vs code consola de depuración
+                })
+                .ConfigureWebHostDefaults(webBuilder =&gt; webBuilder.UseStartup&lt;Startup&gt;())
+                .ConfigureAppConfiguration(configuration =&gt;
+                {
+                    configuration.AddJsonFile(&quot;appsettings.json&quot;, optional: false, reloadOnChange: true);
+                    configuration.AddEnvironmentVariables();
+                })
+                .UseSerilog();
+
+        private static void ConfigureLogging()
+        {
+            // Get Application version to Log
+            var productVersion = &quot;&quot;;
+            var assembly = Assembly.GetExecutingAssembly();
+            var assemblyVersion = assembly.GetName().Version;
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            productVersion = fvi.ProductVersion ?? &quot;product version not found&quot;;
+
+            var environment = Environment.GetEnvironmentVariable(&quot;ASPNETCORE_ENVIRONMENT&quot;);
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile(&quot;appsettings.json&quot;, optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
+
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .Enrich.WithExceptionDetails(new DestructuringOptionsBuilder()
+                            .WithDefaultDestructurers()
+                            .WithDestructurers(new[] { new DbUpdateExceptionDestructurer() })
+                            )
+                .Enrich.WithMachineName()
+                .WriteTo.Debug()
+                .WriteTo.Console()
+                .Enrich.WithProperty(&quot;Environment&quot;, environment)
+                .Enrich.WithProperty(&quot;Version&quot;, productVersion)
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
+        }
+</code></pre>
+<p>Code for Startup</p>
+<pre><code>            // This allows to enrich without middleware but it does not have response data
+            // app.UseSerilogRequestLogging(opts =&gt; opts.EnrichDiagnosticContext = LogHelper.EnrichFromRequest);
+            app.UseSerilogRequestLogging();
+            app.UseMiddleware&lt;ApiLogMiddleware&gt;();
+
+            app.UseAuthentication();
+
+</code></pre>
+<h3 id="change-configuration-from-environment-variable">Change configuration from environment variable</h3>
+<p>If you want to change some configuration set in appsetting.json from environment you could set a variable:</p>
+<pre><code>    &quot;Serilog&quot;: &quot;{\&quot;MinimumLevel\&quot;: {\&quot;Override\&quot;: {\&quot;Serilog.AspNetCore\&quot;: \&quot;Information\&quot;}}&quot;,
+</code></pre>
+<p>or other option</p>
+<pre><code>&quot;Serilog__MinimumLevel__Override__Serilog.AspNetCore&quot;: &quot;Information&quot;,
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../semantic-release/" class="btn btn-neutral float-left" title="Releasing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../autocomplete/" class="btn btn-neutral float-right" title="Autocomplete">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../semantic-release/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../autocomplete/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
