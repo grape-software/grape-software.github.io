@@ -116,70 +116,33 @@
 <p>All developers should use this specifications.</p>
 <h2 id="project-specifications">Project specifications</h2>
 <h3 id="c-backend-projects">C# backend projects</h3>
-<p>In .csproj this code should be defined in <PropertyGroup>
-<code>```
-  &lt;VersionPrefix&gt;1.0.0&lt;/VersionPrefix&gt;
-  &lt;VersionSuffix&gt;$([System.DateTime]::UtcNow.ToString(</code>yyyyMMdd-HHmm`))</VersionSuffix></p>
-<pre><code>
-## &lt;a name=&quot;commit&quot;&gt;&lt;/a&gt; Commit Message Format
-
-https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-format
-*This specification is inspired by and supersedes the [AngularJS commit message format][commit-message-format].*
-
-We have very precise rules over how our Git commit messages must be formatted.
-This format leads to **easier to read commit history**.
-
-Each commit message consists of a **header**, a **body**, and a **footer**.
-
-
-</code></pre>
-<header>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
-
-<pre><code>
-The `header` is mandatory and must conform to the [Commit Message Header](#commit-header) format.
-
-The `body` is mandatory for all commits except for those of type &quot;docs&quot;.
-When the body is present it must be at least 20 characters long and must conform to the [Commit Message Body](#commit-body) format.
-
-The `footer` is optional. The [Commit Message Footer](#commit-footer) format describes what the footer is used for and the structure it must have.
-
-
-#### &lt;a name=&quot;commit-header&quot;&gt;&lt;/a&gt;Commit Message Header
-
-</code></pre>
-
-<type>(<scope>): <short summary>
-  │       │             │
-  │       │             └─⫸ Summary in present tense. Not capitalized. No period at the end.
-  │       │
-  │       └─⫸ Commit Scope: animations|bazel|benchpress|common|compiler|compiler-cli|core|
-  │                          elements|forms|http|language-service|localize|platform-browser|
-  │                          platform-browser-dynamic|platform-server|router|service-worker|
-  │                          upgrade|zone.js|packaging|changelog|docs-infra|migrations|ngcc|ve|
-  │                          devtools
-  │
-  └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|test
+<p>In .csproj this code should be defined in <PropertyGroup></p>
+<pre><code>  &lt;VersionPrefix&gt;1.0.0&lt;/VersionPrefix&gt;
+  &lt;VersionSuffix&gt;$([System.DateTime]::UtcNow.ToString(`yyyyMMdd-HHmm`))&lt;/VersionSuffix&gt;
 ```
 
-The `<type>` and `<summary>` fields are mandatory, the `(<scope>)` field is optional.
+</code></pre>
+<h1 id="manually-versioning-angular">Manually versioning Angular</h1>
+<p>In environments add</p>
+<pre><code>version: '1.0.0',
+</code></pre>
+<p>Add in .ts file:</p>
+<pre><code>  version: string = '1.0';
+  year = 0;
+  custom = {
+    version: true,
+  };
 
+  constructor() {}
 
-##### Type
-
-Must be one of the following:
-
-* **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-* **ci**: Changes to our CI configuration files and scripts (examples: CircleCi, SauceLabs)
-* **docs**: Documentation only changes
-* **feat**: A new feature
-* **fix**: A bug fix
-* **perf**: A code change that improves performance
-* **refactor**: A code change that neither fixes a bug nor adds a feature
-* **test**: Adding missing tests or correcting existing tests
+  ngOnInit(): void {
+    this.version = environment.version;
+    this.year = new Date().getFullYear();
+  }
+</code></pre>
+<p>Add in html file:</p>
+<pre><code>&lt;p class=&quot;mb-1&quot;&gt;© {{ year }} AppName v.{{ version }}&lt;/p&gt;
+</code></pre>
               
             </div>
           </div><footer>
