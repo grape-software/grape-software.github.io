@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/linter/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/angular/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Linter Config - Grape Docs</title>
+    <title>Angular - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Linter Config";
-        var mkdocs_page_input_path = "linter.md";
-        var mkdocs_page_url = "/linter/";
+        var mkdocs_page_name = "Angular";
+        var mkdocs_page_input_path = "angular.md";
+        var mkdocs_page_url = "/angular/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -69,22 +69,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="../http-services/">External Services</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Linter Config</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#packages-devdependencies">Packages devDependencies</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#vscode-extensions">vscode extensions</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#vscode-settings">vscode settings</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#eslint-ignore">Eslint ignore</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#eslintrcjson">eslintrc.json</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#internacionalizacion">Internacionalización</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../linter/">Linter Config</a>
                 </li>
               </ul>
               <ul>
@@ -108,7 +94,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Linter Config</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Angular</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -118,105 +104,90 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="configuring-eslint-on-angular">Configuring ESLint on Angular</h1>
-<p>Test on A14 copiar los archivos o el contendido de la carpeta ESLint</p>
+                <h1 id="angular">Angular</h1>
+<p>Proyectos de angular</p>
+<ol>
+<li>ng new PROYECT</li>
+<li>Ejecutar los comandos para el linter</li>
+</ol>
 <pre><code>ng add @angular-eslint/schematics
 ng g @angular-eslint/schematics:convert-tslint-to-eslint
 </code></pre>
-<p>copiar el directorio ESLint al directorio del proyecto</p>
-<h2 id="packages-devdependencies">Packages devDependencies</h2>
-<pre><code>@angular-eslint/builder
-@angular-eslint/eslint-plugin
-@angular-eslint/eslint-plugin-template
-@angular-eslint/schematics
-@angular-eslint/template-parser
-@typescript-eslint/eslint-plugin
-@typescript-eslint/parser
-eslint
-import-sort
-import-sort-cli
-import-sort-parser-typescript
-import-sort-style-module
+<p>si es microfront</p>
+<pre><code>ng add @angular-architects/module-federation
 </code></pre>
-<h2 id="vscode-extensions">vscode extensions</h2>
-<pre><code>{
-&quot;recommendations&quot;: [
-&quot;amatiasq.sort-imports&quot;,
-&quot;DSKWRK.vscode-generate-getter-setter&quot;,
-&quot;esbenp.prettier-vscode&quot;,
-&quot;johnpapa.vscode-peacock&quot;,
-&quot;ms-azuretools.vscode-docker&quot;,
-&quot;ms-vscode.vscode-typescript-tslint-plugin&quot;,
-&quot;PKief.material-icon-theme&quot;,
-&quot;expertly-simple.ng-evergreen&quot;,
-&quot;formulahendry.auto-close-tag&quot;,
-&quot;HookyQR.beautify&quot;,
-&quot;johnpapa.angular-essentials&quot;,
-&quot;msjsdiag.debugger-for-edge&quot;
-]
-}
+<p>Componentes comunes</p>
+<pre><code>npm i bootstrap
+npm i ngx-toastr
+npm i @fortawesome/angular-fontawesome
+npm i @fortawesome/free-solid-svg-icons
+npm i ngx-pagination
+npm i ngx-bootstrap
 </code></pre>
-<h2 id="vscode-settings">vscode settings</h2>
-<p>´´´´
-{
-"debug.openExplorerOnEnd": true,
-"editor.tabSize": 2,
-"editor.rulers": [120],
-"editor.autoIndent": "full",
-"editor.cursorBlinking": "solid",
-"editor.formatOnType": false,
-"editor.formatOnPaste": false,
-"editor.formatOnSave": true,
-"editor.minimap.enabled": false,
-"editor.codeActionsOnSave": {
-"source.organizeImports": true,
-"source.fixAll.tslint": true
-},
-"editor.defaultFormatter": "esbenp.prettier-vscode",
-"[html]": {
-"editor.defaultFormatter": "esbenp.prettier-vscode"
-},
-"[typescript]": {
-"editor.defaultFormatter": "esbenp.prettier-vscode"
-},
-"explorer.openEditors.visible": 0,
-"files.trimTrailingWhitespace": true,
-"files.autoSave": "off",
-"git.confirmSync": false,
-"git.enableSmartCommit": true,
-"typescript.tsdk": "node_modules/typescript/lib",
-"workbench.iconTheme": "material-icon-theme",
-"auto-close-tag.SublimeText3Mode": true,
-"html.autoClosingTags": true,
-"ng-evergreen.upgradeChannel": "Latest"
-}</p>
-<p>´´´´</p>
-<h2 id="eslint-ignore">Eslint ignore</h2>
-<p>File .eslintignore
-´´´´
-node_modules
-dist
-´´´´</p>
-<h2 id="eslintrcjson">eslintrc.json</h2>
-<h2 id="internacionalizacion">Internacionalización</h2>
-<pre><code>ng add @angular/localize
+<p>Configurar angular.js</p>
+<pre><code>              &quot;node_modules/bootstrap/dist/js/bootstrap.bundle.min.js&quot;
+ y
+
+               &quot;node_modules/bootstrap/scss/bootstrap.scss&quot;,
+              &quot;node_modules/ngx-toastr/toastr.css&quot;,
+
+
 </code></pre>
-<p>Agregar en angular.json</p>
-<pre><code>&quot;projects&quot;: {
-  &quot;my-angular-project&quot;: {
-    &quot;i18n&quot;: {
-      &quot;sourceLocale&quot;: &quot;es-AR&quot;
-    }
-  }
-}
+<p>Copiar:</p>
+<ul>
+<li>auth.guard.ts</li>
+<li>http-token.interceptor.ts</li>
+</ul>
+<p>Configurar en app.module.ts</p>
+<pre><code>imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    // CommonModule,
+    RouterModule.forRoot(routes),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
+    ModalModule.forRoot(),
+    HttpClientModule,
+    TabsModule.forRoot(),
+    // NgxPaginationModule,
+    // TooltipModule.forRoot(),
+    BsDropdownModule.forRoot(),
+  ],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
+</code></pre>
+<p>Agregar routes</p>
+<pre><code>export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'noti',
+    pathMatch: 'full',
+  },
+  {
+    path: 'noti',
+    loadChildren: () =&gt; import('./notificaciones/notificaciones.module').then((m) =&gt; m.NotificacionesModule),
+  },
+
+  {
+    path: 'login',
+    component: LoginMfeComponent,
+  },
+</code></pre>
+<p>Copiar services helper uy auth para login-mfe</p>
+<p>Acomodar app.component.html</p>
+<pre><code>&lt;div class=&quot;container&quot;&gt;
+  &lt;router-outlet&gt;&lt;/router-outlet&gt;
+&lt;/div&gt;
+
 </code></pre>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../http-services/" class="btn btn-neutral float-left" title="External Services"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../microfronts/" class="btn btn-neutral float-right" title="Microfronts">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -238,10 +209,6 @@ dist
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../http-services/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../microfronts/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
