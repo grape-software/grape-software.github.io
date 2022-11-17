@@ -81,6 +81,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="../schema-compare/">Schema Compare</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../videos/">Videos snippets</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -185,6 +189,52 @@ npm i ngx-bootstrap
 &lt;/div&gt;
 
 </code></pre>
+<h1 id="multi-idiomas">Multi idiomas</h1>
+<p>ng add @angular/localize
+https://angular.io/guide/i18n-overview</p>
+<p>Agregar a los componentes que necesiten ser traducidos
+<XXX i18n="@@UniqueTextId"> -&gt; para no repetir se puede armar una lista de los Ids en el proyecto y los textos que traducen</p>
+<h2 id="angularjs">angular.js</h2>
+<p>En el tag ProjecName agregar:</p>
+<pre><code>&quot;i18n&quot;: {
+  &quot;sourceLocale&quot;:&quot;es&quot;, --&gt; es el idioma default
+  &quot;locales&quot;:{
+    &quot;en&quot;:&quot;src/locale/messages.en.json&quot;
+  }
+}
+</code></pre>
+<p>en el tag architect:build:options agregar:</p>
+<pre><code>&quot;localize&quot;:true --&gt; para que compile en todos los idiomas o &quot;localize&quot;:[&quot;es&quot;] --&gt; para que compile en un idioma predeterminado
+</code></pre>
+<p>En architect:build:configurations agregar:</p>
+<pre><code>&quot;es&quot;:{
+  &quot;localize&quot;:&quot;es&quot;
+},
+&quot;en&quot;:{
+  &quot;localize&quot;:&quot;en&quot;
+}
+</code></pre>
+<p>en architect:serve:configurations agregar:</p>
+<pre><code>&quot;es&quot;:{
+  &quot;browserTarget&quot;:&quot;core:build:es&quot;
+},
+&quot;en&quot;:{
+  &quot;browserTarget&quot;:&quot;core:build:en&quot;
+}
+</code></pre>
+<h2 id="packagejson">package.json</h2>
+<p>Se deberá ajustar para que cuando se haga el serve o el build lo haga considerando el multi idioma. Cada vez que se agregue un TAG i18n o $localize en los TS se deberá correr el npm run extract-i18n para reconstruir el messages.json sino tirará un warning que falta una traducción.
+en scripts agregar:</p>
+<pre><code>&quot;start-es&quot;:&quot;ng serve --configuration=es&quot;,
+&quot;start-en&quot;:&quot;ng serve --configuration=en&quot;,
+&quot;extract-i18n&quot;:&quot;ng extract-i18n --format=json --output-pat src/locale&quot;, --&gt; esto deja el archivo messages.json que despues hay que pasarlo al ingles copiandolo messages.en.json
+</code></pre>
+<h2 id="ejemplos-de-codigo-multi-idioma">ejemplos de código multi idioma</h2>
+<p>En los módulos para que funcione el $localize es necesario importar: import '@angular/localize/init'
+Hay que agregar en providers del/los módulos {provide: LOCALE_ID, useValue:'es'}</p>
+<p>en los archivos TS los string que deban ser traducidos se sacan así $localize<code>:@@UniqueTextId:cadena a traducir ${VARIABLE SI NECESITO CONCATENAR ALGO}</code></p>
+<p>en los archivos HTML
+<XXX i18n="@@UniqueTextId"> -&gt; para no repetir se puede armar una lista de los Ids en el proyecto y los textos que traducen</p>
               
             </div>
           </div><footer>
