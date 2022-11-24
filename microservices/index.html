@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/powerbi/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/microservices/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Powerbi - Grape Docs</title>
+    <title>Microservices - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Powerbi";
-        var mkdocs_page_input_path = "powerbi.md";
-        var mkdocs_page_url = "/powerbi/";
+        var mkdocs_page_name = "Microservices";
+        var mkdocs_page_input_path = "microservices.md";
+        var mkdocs_page_url = "/microservices/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -77,8 +77,14 @@
                 <li class="toctree-l1"><a class="reference internal" href="../microfronts/">Microfronts</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../microservices/">Microservices</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Microservices</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#adding-core">Adding Core</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#startup-services">Startup services</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -89,18 +95,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="../videos/">Videos snippets</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Powerbi</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#links">Links</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#permisos">Permisos</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#powerbi-cli">Powerbi cli</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#change-database">Change database</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../powerbi/">Powerbi</a>
                 </li>
               </ul>
       </div>
@@ -116,7 +112,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Powerbi</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Microservices</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -126,41 +122,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="configuracion">Configuracion</h1>
-<ol>
-<li>crear una cuenta que tenga asociada una licencia pro</li>
-<li>asignar en admin de office 365 los permisos de administrador de powerbi y power plataform</li>
-<li>ingresar al portal de azure con esa cuenta y registrar una nueva aplicación en registro de aplicaciones</li>
-<li>asignar permisos a las API de power bi</li>
-<li>ingresar al portal de powerbi y validar en Portal de Administración que este habilitado Conceder acceso a las APIs en Desarrollador</li>
-<li>Crear o modificar los workspace para darles acceso a la aplicación registrada en azure (verificar el guid)</li>
-</ol>
-<h2 id="links">Links</h2>
-<p>Curso de powerbi embedded</p>
-<ul>
-<li>https://www.youtube.com/playlist?list=PLib8Q64STW-tCZVSvBAuEIzBsVlf0C81f</li>
-<li>https://blog.jpries.com/2020/01/03/getting-started-with-the-power-bi-api-querying-the-power-bi-rest-api-directly-with-c/</li>
-<li>https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-service-principal</li>
-<li>https://learn.microsoft.com/en-us/power-bi/admin/service-admin-role?source=recommendations</li>
-</ul>
-<h2 id="permisos">Permisos</h2>
-<p>Se puede acceder para revisar desde el portal de azure -&gt; Active Directory -&gt; Registro de Aplicaciones -&gt; Permisos de APIs
-El usuario con la cuenta pro debe tener establecido en roles de administrador:</p>
-<ul>
-<li>Administrador de PowerBI</li>
-<li>Administrador de Power Plataform</li>
-</ul>
-<h2 id="powerbi-cli">Powerbi cli</h2>
-<p>pbicli login --service-principal -p 25601d95-de48-4763-a36a-18df6f2805fb -s ZwE8Q~EEqhEjHLv88GCRP0m4Qsa2uQJVjH8BLaaD -t 465f9a2e-6e22-4169-938a-009fbbe36f1f
-pbicli report list --workspace 928fe4f4-2825-4162-8264-1410a653055f</p>
-<h2 id="change-database">Change database</h2>
-<p>https://community.powerbi.com/t5/Desktop/Power-BI-API-to-change-Database-dynamically/m-p/252013
-https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-dynamic-binding</p>
+                <h1 id="microservices-grape-docs">Microservices Grape Docs</h1>
+<h2 id="adding-core">Adding Core</h2>
+<p>Mostly a microservice use User and other business objects to build is own logic.
+This should be done adding package Grape.Core from private repo https://github.com/grape-software/core/packages with the follow command:</p>
+<pre><code>dotnet add PROJECT package Grape.Core --version X.X.X
+</code></pre>
+<h2 id="startup-services">Startup services</h2>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../videos/" class="btn btn-neutral float-left" title="Videos snippets"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../microfronts/" class="btn btn-neutral float-left" title="Microfronts"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../schema-compare/" class="btn btn-neutral float-right" title="Schema Compare">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -183,8 +157,10 @@ https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-dynamic-bind
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../videos/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../microfronts/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
+    
+      <span><a href="../schema-compare/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

@@ -41,6 +41,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://grape-software.github.io/microservices/</loc>
+         <lastmod>2022-11-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://grape-software.github.io/powerbi/</loc>
          <lastmod>2022-11-24</lastmod>
          <changefreq>daily</changefreq>
