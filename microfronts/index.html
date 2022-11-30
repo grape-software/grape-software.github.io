@@ -250,6 +250,22 @@ Copiar y pegar el TS
 Pasar los servicios
 Copiar y pegar el HTML
 Usar el instructivo de migración de B4 a B5 que está en esta doc</p>
+<h2 id="crear-el-login-mfe-del-microproyecto">Crear el login-mfe del microproyecto</h2>
+<p>Es un login que se usa para desarrollar y no necesitar abrir el proyecto de layout</p>
+<ol>
+<li>Copiar la carpeta login-mfe en App</li>
+<li>Agregar en declarations el LoginMfeComponent</li>
+<li>Agregar el routing login al LoginMfe</li>
+</ol>
+<pre><code>  {
+    path: 'login',
+    component: LoginMfeComponent,
+  },
+</code></pre>
+<h2 id="layout">Layout</h2>
+<p>Agregar como submodulo el layout y core</p>
+<pre><code>git submodule add https://github.com/grape-software/microfront
+</code></pre>
               
             </div>
           </div><footer>
