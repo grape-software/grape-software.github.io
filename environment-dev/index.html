@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/angular/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/environment-dev/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Angular - Grape Docs</title>
+    <title>Environment Dev - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Angular";
-        var mkdocs_page_input_path = "angular.md";
-        var mkdocs_page_url = "/angular/";
+        var mkdocs_page_name = "Environment Dev";
+        var mkdocs_page_input_path = "environment-dev.md";
+        var mkdocs_page_url = "/environment-dev/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -93,8 +93,24 @@
                 <li class="toctree-l1"><a class="reference internal" href="../powerbi/">Powerbi</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../environment-dev/">Environment Dev</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Environment Dev</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#comandos-utiles">Comandos utiles</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#entornos-activados">Entornos activados</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#auth-macro">Auth Macro</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#uba-posgrado">UBA Posgrado</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#notificaciones-boldt">Notificaciones Boldt</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#neox-acento">Neox Acento</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
               </ul>
       </div>
@@ -110,7 +126,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Angular</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Environment Dev</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -120,136 +136,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="angular">Angular</h1>
-<p>Proyectos de angular</p>
-<ol>
-<li>ng new PROYECT</li>
-<li>Ejecutar los comandos para el linter</li>
-</ol>
-<pre><code>ng add @angular-eslint/schematics
-ng g @angular-eslint/schematics:convert-tslint-to-eslint
-</code></pre>
-<p>si es microfront</p>
-<pre><code>ng add @angular-architects/module-federation
-</code></pre>
-<p>Componentes comunes</p>
-<pre><code>npm i bootstrap
-npm i ngx-toastr
-npm i @fortawesome/angular-fontawesome
-npm i @fortawesome/free-solid-svg-icons
-npm i ngx-pagination
-npm i ngx-bootstrap
-</code></pre>
-<p>Configurar angular.js</p>
-<pre><code>              &quot;node_modules/bootstrap/dist/js/bootstrap.bundle.min.js&quot;
- y
-
-               &quot;node_modules/bootstrap/scss/bootstrap.scss&quot;,
-              &quot;node_modules/ngx-toastr/toastr.css&quot;,
-
+                <h1 id="configuracion-del-envirnoment-de-dev-en-digital-ocean">Configuración del Envirnoment de Dev en digital ocean</h1>
+<h2 id="comandos-utiles">Comandos utiles</h2>
+<p>Para creación de los certifcados con Letscrypt y nginx</p>
+<pre><code> crear el archivo
+ sudo nginx -t
+ sudo certbot --nginx -d domain.sandbox.ar
 
 </code></pre>
-<p>Copiar:</p>
-<ul>
-<li>auth.guard.ts</li>
-<li>http-token.interceptor.ts</li>
-</ul>
-<p>Configurar en app.module.ts</p>
-<pre><code>imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    BrowserAnimationsModule,
-    // CommonModule,
-    RouterModule.forRoot(routes),
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-    }),
-    ModalModule.forRoot(),
-    HttpClientModule,
-    TabsModule.forRoot(),
-    // NgxPaginationModule,
-    // TooltipModule.forRoot(),
-    BsDropdownModule.forRoot(),
-  ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
-</code></pre>
-<p>Agregar routes</p>
-<pre><code>export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'noti',
-    pathMatch: 'full',
-  },
-  {
-    path: 'noti',
-    loadChildren: () =&gt; import('./notificaciones/notificaciones.module').then((m) =&gt; m.NotificacionesModule),
-  },
-
-  {
-    path: 'login',
-    component: LoginMfeComponent,
-  },
-</code></pre>
-<p>Copiar services helper uy auth para login-mfe</p>
-<p>Acomodar app.component.html</p>
-<pre><code>&lt;div class=&quot;container&quot;&gt;
-  &lt;router-outlet&gt;&lt;/router-outlet&gt;
-&lt;/div&gt;
-
-</code></pre>
-<h1 id="multi-idiomas">Multi idiomas</h1>
-<p>ng add @angular/localize
-https://angular.io/guide/i18n-overview</p>
-<p>Agregar a los componentes que necesiten ser traducidos
-<XXX i18n="@@UniqueTextId"> -&gt; para no repetir se puede armar una lista de los Ids en el proyecto y los textos que traducen</p>
-<h2 id="angularjs">angular.js</h2>
-<p>En el tag ProjecName agregar:</p>
-<pre><code>&quot;i18n&quot;: {
-  &quot;sourceLocale&quot;:&quot;es&quot;, --&gt; es el idioma default
-  &quot;locales&quot;:{
-    &quot;en&quot;:&quot;src/locale/messages.en.json&quot;
-  }
-}
-</code></pre>
-<p>en el tag architect:build:options agregar:</p>
-<pre><code>&quot;localize&quot;:true --&gt; para que compile en todos los idiomas o &quot;localize&quot;:[&quot;es&quot;] --&gt; para que compile en un idioma predeterminado
-</code></pre>
-<p>En architect:build:configurations agregar:</p>
-<pre><code>&quot;es&quot;:{
-  &quot;localize&quot;:&quot;es&quot;
-},
-&quot;en&quot;:{
-  &quot;localize&quot;:&quot;en&quot;
-}
-</code></pre>
-<p>en architect:serve:configurations agregar:</p>
-<pre><code>&quot;es&quot;:{
-  &quot;browserTarget&quot;:&quot;core:build:es&quot;
-},
-&quot;en&quot;:{
-  &quot;browserTarget&quot;:&quot;core:build:en&quot;
-}
-</code></pre>
-<h2 id="packagejson">package.json</h2>
-<p>Se deberá ajustar para que cuando se haga el serve o el build lo haga considerando el multi idioma. Cada vez que se agregue un TAG i18n o $localize en los TS se deberá correr el npm run extract-i18n para reconstruir el messages.json sino tirará un warning que falta una traducción.
-en scripts agregar:</p>
-<pre><code>&quot;start-es&quot;:&quot;ng serve --configuration=es&quot;,
-&quot;start-en&quot;:&quot;ng serve --configuration=en&quot;,
-&quot;extract-i18n&quot;:&quot;ng extract-i18n --format=json --output-pat src/locale&quot;, --&gt; esto deja el archivo messages.json que despues hay que pasarlo al ingles copiandolo messages.en.json
-</code></pre>
-<h2 id="ejemplos-de-codigo-multi-idioma">ejemplos de código multi idioma</h2>
-<p>En los módulos para que funcione el $localize es necesario importar: import '@angular/localize/init'
-Hay que agregar en providers del/los módulos {provide: LOCALE_ID, useValue:'es'}</p>
-<p>en los archivos TS los string que deban ser traducidos se sacan así $localize<code>:@@UniqueTextId:cadena a traducir ${VARIABLE SI NECESITO CONCATENAR ALGO}</code></p>
-<p>en los archivos HTML
-<XXX i18n="@@UniqueTextId"> -&gt; para no repetir se puede armar una lista de los Ids en el proyecto y los textos que traducen</p>
+<h2 id="entornos-activados">Entornos activados</h2>
+<h3 id="auth-macro">Auth Macro</h3>
+<p>url:</p>
+<h3 id="uba-posgrado">UBA Posgrado</h3>
+<p>url:</p>
+<h3 id="notificaciones-boldt">Notificaciones Boldt</h3>
+<p>url:</p>
+<h3 id="neox-acento">Neox Acento</h3>
+<p>url:</p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../powerbi/" class="btn btn-neutral float-left" title="Powerbi"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -270,6 +179,8 @@ Hay que agregar en providers del/los módulos {provide: LOCALE_ID, useValue:'es'
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
+    
+      <span><a href="../powerbi/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>

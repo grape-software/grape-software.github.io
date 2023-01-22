@@ -95,6 +95,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="../powerbi/">Powerbi</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../environment-dev/">Environment Dev</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -266,6 +270,94 @@ Usar el instructivo de migración de B4 a B5 que está en esta doc</p>
 <p>Agregar como submodulo el layout y core</p>
 <pre><code>git submodule add https://github.com/grape-software/microfront
 </code></pre>
+<h2 id="armado-de-docker-para-integrar-el-layout-core-negocio">Armado de docker para integrar el layout + core + negocio</h2>
+<p>Para el armado del despliegue es necesario crear un docker que contenga el Layout, Core y los microfronts propios del negocio en un solo contenedor.
+Para ello es importante tener en cuenta cual será la URL donde estará corriendo el front y las APIs correspondientes.</p>
+<h3 id="configuracion-del-dockerfile">Configuración del Dockerfile</h3>
+<p>El docker file tiene que compilar los proyectos SPA, incluido los submodulos layout y core.
+Es importante establecer la variable de entorno donde está el HOST de las urls de las APIs en el entorno donde se vaya a hacer la compilación. Así de esta forma se hace un reemplazo en el environment.prod.ts reemplazando {API_HOST}.</p>
+<pre><code>ENV API_HOST=uni.sandbox.ar
+</code></pre>
+<p>Este es un ejemplo de como armar el Dockerfile para desplegar un contenedor de frontend con el layout y todos los microfronts.</p>
+<pre><code>#Primera Etapa
+FROM node:16.13.1-alpine3.14 as build-step
+
+ENV API_HOST=uni.sandbox.ar
+#---para CORE
+RUN mkdir -p /appcore
+WORKDIR /appcore
+COPY /microfronts/core/ /appcore
+RUN npm install
+COPY . /appcore
+RUN npm run build
+
+#---para LAYOUT
+RUN mkdir -p /applayout
+WORKDIR /applayout
+COPY /microfronts/layout/ /applayout
+RUN npm install
+COPY . /applayout
+RUN npm run build
+
+#---para MF Uni
+RUN mkdir -p /appuni
+WORKDIR /appuni
+COPY /universidad/ /appuni
+RUN npm install
+COPY . /appuni
+RUN npm run build
+
+#Segunda Etapa
+FROM nginx:1.17.1-alpine
+#copio los sites
+RUN mkdir /usr/share/nginx/html/core
+RUN mkdir /usr/share/nginx/html/layout
+RUN mkdir /usr/share/nginx/html/uni
+
+COPY --from=build-step /appcore/dist/core/es/ /usr/share/nginx/html/core
+COPY --from=build-step /applayout/dist/neox/ /usr/share/nginx/html/layout
+COPY --from=build-step /appuni/dist/universidad/ /usr/share/nginx/html/uni
+
+# COPY ./microfronts/core/dist/core/es/ /usr/share/nginx/html/core
+# COPY ./microfronts/layout/dist/neox/ /usr/share/nginx/html/layout
+# COPY ./universidad/dist/universidad/ /usr/share/nginx/html/uni
+
+#copio config del nginx
+COPY nginx.conf /etc/nginx
+
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+
+</code></pre>
+<h3 id="configuracion-del-nginx">Configuración del nginx</h3>
+<p>Para poder armar la configuración es necesario notar que el punto de ingreso será el shell Layout, quien luego levantará de la tabla Microfront de la base de datos la configuración del resto.</p>
+<pre><code>events{}
+http {
+    include /etc/nginx/mime.types;
+    server {
+        listen 80;
+        server_name uni.sandbox.ar; # &lt;-- URL donde queda el destino en prod
+        root /usr/share/nginx/html/;
+        index index.html;
+        location / {
+             root /usr/share/nginx/html/layout; # &lt;-- Proyecto Layout
+             try_files $uri $uri/  index.html;
+        }
+        # Microfronts tiene que estar configurado el publicPath del webpack.config de cada microfront. Ej /core/ o /uni/
+        location ^~/core {
+             root /usr/share/nginx/html/core;
+        }
+        location ^~/uni {
+                 root /usr/share/nginx/html/uni;
+        }
+    }
+}
+</code></pre>
+<h3 id="configuracion-de-los-microfronts-webpackconfig">Configuración de los microfronts webpack.config</h3>
+<p>output: {
+uniqueName: 'universidad',
+publicPath: '/uni/', &lt;-- ESTO ES IMPORTANTE TIENE QUE ESTAR EN EL NGINX QUE LO SIRVA COMO CONTENIDO ESTATICO
+},</p>
               
             </div>
           </div><footer>
