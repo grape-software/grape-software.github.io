@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/neox/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Servicios Neox - Grape Docs</title>
+    <title>Neox deploy - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Servicios Neox";
+        var mkdocs_page_name = "Neox deploy";
         var mkdocs_page_input_path = "neox.md";
         var mkdocs_page_url = "/neox/";
       </script>
@@ -97,6 +97,22 @@
                 <li class="toctree-l1"><a class="reference internal" href="../environment-dev/">Environment Dev</a>
                 </li>
               </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Neox deploy</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#clientes-y-ubicaciones">Clientes y ubicaciones</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#publicacion-en-produccion-nueva-version">Publicación en producción nueva versión</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-actualizacion-de-la-base-de-datos">1. Actualización de la base de datos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-creacion-de-los-pulls-de-dev-a-main-y-merge">2. Creación de los Pulls de dev a main y merge</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -110,7 +126,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Servicios Neox</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Neox deploy</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -121,15 +137,37 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="servicios-neox">Servicios Neox</h1>
-<h2 id="publicacion-en-produccion-version-1x">Publicación en producción versión 1.X</h2>
+<h2 id="clientes-y-ubicaciones">Clientes y ubicaciones</h2>
+<p>Marquez es el único que tiene su propio Tenant en AWS. Por ello para la actualización de la base de datos hay que conectarse a esa servicio. Y para lo que es microservicios y frontend tienen una maquina virtual.
+El resto de los clientes están en DB Azure y una maquina virtual en Azure.</p>
+<p>Todos los micro servicios y frontend están dockerizados.</p>
+<h2 id="publicacion-en-produccion-nueva-version">Publicación en producción nueva versión</h2>
+<p>Cuando se sube una versión nueva se sube para todas las implementaciones de Neox, NUNCA se deberá subir en una sola implementación.</p>
+<p>Las publicaciones constan de dos partes:</p>
+<ol>
+<li>Actualización de la base de datos. Estrucutras y datos.</li>
+<li>Integración de los microservicios y frontend en las branch main.</li>
+</ol>
+<h3 id="1-actualizacion-de-la-base-de-datos">1. Actualización de la base de datos</h3>
+<p>A los desarrolladores que modifican estructuras de datos se les solicita dejar un script en una carpeta (última versión) con los cambios que vayan haciendo para ejecutar los scripts de base de datos en todas las bases de datos. Además, deberán actualizar el proyecto de base de datos.</p>
+<p>A la hora de realizar la actualización se debería correr el script y tener presente que si hay algún script que solo deberá ejecutarse en una sola de las bases de datos por cuestiones de configuración deberá existir el script propio de la implementación, como por ej. marquez.sql.</p>
+<p>Por las dudas luego de ejecutar los scripts ejecuto desde el Azure Data Studio un Schema Compare del proyecto de base de datos contra cada una de las bases, es un procedimiento que no lleva más de 30 minutos pero en alguna oportunidad han aparecido faltantes en los script que dejan los desarrolladores. El procedimiento es el siguiente:</p>
 <ol>
 <li>Correr comparador proyecto contra cada base contra el proyecto abriendo el archivo loca-remote.scmp de la carpeta del proyecto de base de datos, comparar proyecto vs base neox</li>
 <li>Por cada base generar el script y verificarlo, hacer un replace de "WITH NOCHECK" por vacio</li>
 <li>Verificar y ejecutar script de la carpeta deploys a publicar https://github.com/neox-software/sql/pulls</li>
 </ol>
+<h3 id="2-creacion-de-los-pulls-de-dev-a-main-y-merge">2. Creación de los Pulls de dev a main y merge</h3>
+<p>Por último se deberán realizar los merge de los Pulls de dev a prod que incluyen la versión.
+Es importante revisar que se estén actualizando los números de las versiones de los microservicios, así es fácil de probarlos una vez desplegados con el /status de cada microservicio.
+Lo mismo con el frontend tiene que estar modificada la versión del archivo environment.prod.ts con la próxima. 1.XX agregando una a la anterior release.
+Una vez integrados los pulls los actions realizan el despliegue solos.</p>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../environment-dev/" class="btn btn-neutral float-left" title="Environment Dev"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -150,6 +188,8 @@
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
+    
+      <span><a href="../environment-dev/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>
