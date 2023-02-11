@@ -251,6 +251,53 @@ Hay que agregar en providers del/los módulos {provide: LOCALE_ID, useValue:'es'
 <p>en los archivos TS los string que deban ser traducidos se sacan así $localize<code>:@@UniqueTextId:cadena a traducir ${VARIABLE SI NECESITO CONCATENAR ALGO}</code></p>
 <p>en los archivos HTML
 <XXX i18n="@@UniqueTextId"> -&gt; para no repetir se puede armar una lista de los Ids en el proyecto y los textos que traducen</p>
+<h2 id="uso-de-observables">Uso de Observables</h2>
+<p>Un observable por lo general se define en la capa de servicios cuando se comparte entre diferentes componentes:</p>
+<pre><code>  private objectSubject: BehaviorSubject&lt;any&gt;;
+  public object$: Observable&lt;any&gt;;
+</code></pre>
+<p>En el servicio se realizan operaciones que actualizan el privado y tienen que ejecutar el .next (este evento es el que notifica a los suscriptores)</p>
+<pre><code>Login(identifier?: string, password?: string) {
+    return this.http
+      .post(`${environment.apiUrl}/auth/login`, {
+        Identifier: identifier,
+        Password: password,
+      })
+      .pipe(
+        tap((authResp: any) =&gt; {
+          localStorage.setItem('user', JSON.stringify(authResp));
+          this.userSubject.next(localUser);
+        }),
+      );
+  }
+</code></pre>
+<p>Por ultimo queda suscribirse a los observable desde los componentes, esto se realiza de distintas formas:</p>
+<ul>
+<li>Si es en el template hay que avisar que son async</li>
+</ul>
+<pre><code>&lt;div class=&quot;d-md-flex justify-content-md-end&quot; *ngIf=&quot;(inscripcionOferta$ | async).length&quot;&gt;
+&lt;li class=&quot;list-group-item border-bottom py-0&quot; *ngFor=&quot;let inscripcion of items$ | async&quot;&gt;
+</code></pre>
+<ul>
+<li>Si es en el TS se crea en objeto local y la suscripción. Se suscribe al inicio y se desuscribe al destroy, esto es muy importante.</li>
+</ul>
+<pre><code>  user: any;
+  userSub: Subscription;
+
+  ngOnInit(): void {
+    this.userSub = this.authService.user$.subscribe((u) =&gt; {
+      if (u != null &amp;&amp; u.userID) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+      this.user = u;
+    });
+  }
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe();
+  }
+</code></pre>
               
             </div>
           </div><footer>
