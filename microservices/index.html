@@ -147,6 +147,22 @@ dotnet new webapi --output services
 dotnet sln add services
 </code></pre>
 <h2 id="adding-core">Adding Core</h2>
+<p>First create NuGet.Config file in root solution folder and add content below, changing Username and ClearTextPassword (should be PAT from Github account with permissions on below repository indicated)</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;configuration&gt;
+    &lt;packageSources&gt;
+        &lt;clear /&gt;
+        &lt;add key=&quot;github&quot; value=&quot;https://nuget.pkg.github.com/macro-i/index.json&quot; /&gt;
+        &lt;add key=&quot;nuget.org&quot; value=&quot;https://api.nuget.org/v3/index.json&quot; protocolVersion=&quot;3&quot; /&gt;
+    &lt;/packageSources&gt;
+    &lt;packageSourceCredentials&gt;
+        &lt;github&gt;
+            &lt;add key=&quot;Username&quot; value=&quot;XXXX&quot; /&gt;
+            &lt;add key=&quot;ClearTextPassword&quot; value=&quot;XXXXX&quot; /&gt;
+        &lt;/github&gt;
+    &lt;/packageSourceCredentials&gt;
+&lt;/configuration&gt;
+</code></pre>
 <p>Mostly a microservice use User and other business objects to build is own logic.
 This should be done adding package Grape.Core from private repo https://github.com/grape-software/core/packages with the follow command:</p>
 <pre><code>dotnet add PROJECT package Grape.Core --version X.X.X
