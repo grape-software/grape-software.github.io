@@ -61,6 +61,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://grape-software.github.io/nginx_config_angular/</loc>
+         <lastmod>2023-03-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://grape-software.github.io/powerbi/</loc>
          <lastmod>2023-03-22</lastmod>
          <changefreq>daily</changefreq>

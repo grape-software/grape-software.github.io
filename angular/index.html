@@ -57,6 +57,12 @@
                 <li class="toctree-l1"><a class="reference internal" href="../logs/">Logs</a>
                 </li>
               </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Angular</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../autocomplete/">Autocomplete</a>
                 </li>
@@ -103,6 +109,10 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../ms-jobs/">Microservicio Jobs</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../nginx_config_angular/">Nginx angular</a>
                 </li>
               </ul>
       </div>
@@ -259,6 +269,11 @@ Hay que agregar en providers del/los módulos {provide: LOCALE_ID, useValue:'es'
 <p>Un observable por lo general se define en la capa de servicios cuando se comparte entre diferentes componentes:</p>
 <pre><code>  private objectSubject: BehaviorSubject&lt;any&gt;;
   public object$: Observable&lt;any&gt;;
+
+  constructor() {
+    this.objectSubject = new BehaviorSubject&lt;any[]&gt;();
+    this.object$ = this.objectSubject.asObservable();
+  }
 </code></pre>
 <p>En el servicio se realizan operaciones que actualizan el privado y tienen que ejecutar el .next (este evento es el que notifica a los suscriptores)</p>
 <pre><code>Login(identifier?: string, password?: string) {
@@ -305,6 +320,10 @@ Hay que agregar en providers del/los módulos {provide: LOCALE_ID, useValue:'es'
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../logs/" class="btn btn-neutral float-left" title="Logs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../autocomplete/" class="btn btn-neutral float-right" title="Autocomplete">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -326,6 +345,10 @@ Hay que agregar en providers del/los módulos {provide: LOCALE_ID, useValue:'es'
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../logs/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../autocomplete/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

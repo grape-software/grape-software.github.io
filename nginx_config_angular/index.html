@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/ms-jobs/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/nginx_config_angular/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Microservicio Jobs - Grape Docs</title>
+    <title>Nginx angular - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Microservicio Jobs";
-        var mkdocs_page_input_path = "ms-jobs.md";
-        var mkdocs_page_url = "/ms-jobs/";
+        var mkdocs_page_name = "Nginx angular";
+        var mkdocs_page_input_path = "nginx_config_angular.md";
+        var mkdocs_page_url = "/nginx_config_angular/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -105,22 +105,12 @@
                 <li class="toctree-l1"><a class="reference internal" href="../neox/">Neox deploy</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Microservicio Jobs</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#templates">Templates</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#insertar-un-nuevo-template">Insertar un nuevo template</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#envio-de-mails">Envío de mails</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ms-jobs/">Microservicio Jobs</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../nginx_config_angular/">Nginx angular</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Nginx angular</a>
                 </li>
               </ul>
       </div>
@@ -136,7 +126,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Microservicio Jobs</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Nginx angular</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -146,63 +136,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="uso-del-microservicio-jobs-y-templates">Uso del microservicio Jobs y templates</h1>
-<p>El microservicio Jobs tiene los siguientes servicio:</p>
-<ul>
-<li>RabitMQ como bus para encolar tareas largas y convertirlas en asyncronicas</li>
-<li>SignalR para notificar a los usuarios sobre la finalización de las tareas y como mensajería</li>
-<li>Database para administrar los templates y los logs de interacción</li>
-</ul>
-<h2 id="templates">Templates</h2>
-<p>Los templates se guardan en la base en la tabla Templates permiten definir desde el formato para el armado de un PDF hasta el envío de notificaciones por distintos canales: mails, sms, etc.</p>
-<p>Este es un ejemplo para insertar un template que permite la configuración del envío de mails. El JsonDirective es un JSON con una interface que se usa depende del tipo de template que sea.
-Para el caso de los mails tiene la configuración de con que se envían los mails, los datos estáticos que se enviaran por mail y los parámetros a ser reemplazados en tiempo de ejecución.
-Para el envío hay un endpoint que permite indicarle cuál es el template (TemplateId) y cuales son los datos a ser reemplazados (diccionario con mapping con el objeto y donde va en el texto).
-De esta forma cuando alguien quiera enviar un mail deberá inserta in registro en la base de datos con un nuevo TempateId y llamar al endpoint con los datos del objeto que serán reempalzados.</p>
-<h3 id="insertar-un-nuevo-template">Insertar un nuevo template</h3>
-<p>Ejemplo para insertar en la base</p>
-<pre><code>insert into templates (TemplateId, JsonDirective, [Module], Active )
-values ('AUTH-CHECK-MAIL','{
-    &quot;MailSettings&quot;: {
-        &quot;MailServer&quot;: &quot;email-smtp.us-east-1.amazonaws.com&quot;,
-        &quot;MailPort&quot;: 587,
-        &quot;Password&quot;: &quot;&quot;,
-        &quot;UserName&quot;: &quot;AKIASK5SMKGUXLBRWIAB&quot;,
-        &quot;SenderName&quot;: &quot;GRAPE - Verificar Email&quot;,
-        &quot;Sender&quot;: &quot;transaccional@grape.com.ar&quot;,
-        &quot;EnableSsl&quot;: true
-    },
-    &quot;MailMessage&quot;: {
-        &quot;Subject&quot;: &quot;Verificación de Email&quot;,
-        &quot;IsBodyHtml&quot;: true,
-        &quot;Body&quot;: &quot;Estimado / a @identifier hemos generado un link para que verifique su Email &lt; a href=@link&gt;@link&lt;/a&gt;.&quot;
-    },
-    &quot;MailParameters&quot;: {
-        &quot;@identifier&quot;: &quot;Identifier&quot;,
-        &quot;@link&quot;: &quot;Link&quot;
+                <p>events{}
+http {
+    include /etc/nginx/mime.types;
+      server {
+      listen       80;
+      listen  [::]:80;
+      server_name  autogestion.uni.sandbox.ar;
+      root   /usr/share/nginx/html/autogestion;
+      index  index.html index.htm;
+      location / {
+          try_files $uri $uri/ /index.html =404;
+      }
+      #error_page  404              /404.html;
+      # redirect server error pages to the static page /50x.html
+      #
+      error_page   500 502 503 504  /50x.html;
+      location = /50x.html {
+          root   /usr/share/nginx/html;
+      }  <br />
     }
-}','AUTH',1)
-</code></pre>
-<h2 id="envio-de-mails">Envío de mails</h2>
-<p>El envío de mails se realiza llamando al endpoint POST /api/jobs/{TempplateId}/from-template con el objeto a ser reemplazado en el BODY
-Ejemplo de llamada para el envío de mail</p>
-<pre><code>### Send mail from template
-POST {{host}}/mails/AUTH-CHECK-MAIL/from-template
-Content-Type: application/json
-Authorization: {{token}}
-
-{
-    &quot;to&quot;:&quot;fruiz@grape.com.ar&quot;,
-    &quot;Identifier&quot;: &quot;Fernando Ruiz&quot;,
-    &quot;Link&quot;: 6
-}
-</code></pre>
+}</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../neox/" class="btn btn-neutral float-left" title="Neox deploy"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../nginx_config_angular/" class="btn btn-neutral float-right" title="Nginx angular">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../ms-jobs/" class="btn btn-neutral float-left" title="Microservicio Jobs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -225,10 +184,8 @@ Authorization: {{token}}
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../neox/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../ms-jobs/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="../nginx_config_angular/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
