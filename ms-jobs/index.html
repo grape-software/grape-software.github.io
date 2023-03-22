@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/semantic-release/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/ms-jobs/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Releasing - Grape Docs</title>
+    <title>Microservicio Jobs - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Releasing";
-        var mkdocs_page_input_path = "semantic-release.md";
-        var mkdocs_page_url = "/semantic-release/";
+        var mkdocs_page_name = "Microservicio Jobs";
+        var mkdocs_page_input_path = "ms-jobs.md";
+        var mkdocs_page_url = "/ms-jobs/";
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -49,16 +49,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="../working/">Working</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Releasing</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#project-specifications">Project specifications</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#c-backend-projects">C# backend projects</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../semantic-release/">Releasing</a>
                 </li>
               </ul>
               <ul>
@@ -109,8 +101,18 @@
                 <li class="toctree-l1"><a class="reference internal" href="../neox/">Neox deploy</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../ms-jobs/">Microservicio Jobs</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Microservicio Jobs</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#templates">Templates</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#insertar-un-nuevo-template">Insertar un nuevo template</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#envio-de-mails">Envío de mails</a>
+    </li>
+    </ul>
                 </li>
               </ul>
       </div>
@@ -126,7 +128,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Releasing</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Microservicio Jobs</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -136,43 +138,62 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="grape-use-of-semantic-release">Grape use of Semantic Release</h1>
-<p>All developers should use this specifications.</p>
-<h2 id="project-specifications">Project specifications</h2>
-<h3 id="c-backend-projects">C# backend projects</h3>
-<p>In .csproj this code should be defined in <PropertyGroup></p>
-<pre><code>  &lt;VersionPrefix&gt;1.0.0&lt;/VersionPrefix&gt;
-  &lt;VersionSuffix&gt;$([System.DateTime]::UtcNow.ToString(`yyyyMMdd-HHmm`))&lt;/VersionSuffix&gt;
-```
-
+                <h1 id="uso-del-microservicio-jobs-y-templates">Uso del microservicio Jobs y templates</h1>
+<p>El microservicio Jobs tiene los siguientes servicio:</p>
+<ul>
+<li>RabitMQ como bus para encolar tareas largas y convertirlas en asyncronicas</li>
+<li>SignalR para notificar a los usuarios sobre la finalización de las tareas y como mensajería</li>
+<li>Database para administrar los templates y los logs de interacción</li>
+</ul>
+<h2 id="templates">Templates</h2>
+<p>Los templates se guardan en la base en la tabla Templates permiten definir desde el formato para el armado de un PDF hasta el envío de notificaciones por distintos canales: mails, sms, etc.</p>
+<p>Este es un ejemplo para insertar un template que permite la configuración del envío de mails. El JsonDirective es un JSON con una interface que se usa depende del tipo de template que sea.
+Para el caso de los mails tiene la configuración de con que se envían los mails, los datos estáticos que se enviaran por mail y los parámetros a ser reemplazados en tiempo de ejecución.
+Para el envío hay un endpoint que permite indicarle cuál es el template (TemplateId) y cuales son los datos a ser reemplazados (diccionario con mapping con el objeto y donde va en el texto).
+De esta forma cuando alguien quiera enviar un mail deberá inserta in registro en la base de datos con un nuevo TempateId y llamar al endpoint con los datos del objeto que serán reempalzados.</p>
+<h3 id="insertar-un-nuevo-template">Insertar un nuevo template</h3>
+<p>Ejemplo para insertar en la base</p>
+<pre><code>insert into templates (TemplateId, JsonDirective, [Module], Active )
+values ('AUTH-CHECK-MAIL','{
+    &quot;MailSettings&quot;: {
+        &quot;MailServer&quot;: &quot;email-smtp.us-east-1.amazonaws.com&quot;,
+        &quot;MailPort&quot;: 587,
+        &quot;Password&quot;: &quot;&quot;,
+        &quot;UserName&quot;: &quot;AKIASK5SMKGUXLBRWIAB&quot;,
+        &quot;SenderName&quot;: &quot;GRAPE - Verificar Email&quot;,
+        &quot;Sender&quot;: &quot;transaccional@grape.com.ar&quot;,
+        &quot;EnableSsl&quot;: true
+    },
+    &quot;MailMessage&quot;: {
+        &quot;Subject&quot;: &quot;Verificación de Email&quot;,
+        &quot;IsBodyHtml&quot;: true,
+        &quot;Body&quot;: &quot;Estimado / a @identifier hemos generado un link para que verifique su Email &lt; a href=@link&gt;@link&lt;/a&gt;.&quot;
+    },
+    &quot;MailParameters&quot;: {
+        &quot;@identifier&quot;: &quot;Identifier&quot;,
+        &quot;@link&quot;: &quot;Link&quot;
+    }
+}','AUTH',1)
 </code></pre>
-<h1 id="manually-versioning-angular">Manually versioning Angular</h1>
-<p>In environments add</p>
-<pre><code>version: '1.0.0',
-</code></pre>
-<p>Add in .ts file:</p>
-<pre><code>  version: string = '1.0';
-  year = 0;
-  custom = {
-    version: true,
-  };
+<h2 id="envio-de-mails">Envío de mails</h2>
+<p>El envío de mails se realiza llamando al endpoint POST /api/jobs/{TempplateId}/from-template con el objeto a ser reemplazado en el BODY
+Ejemplo de llamada para el envío de mail</p>
+<pre><code>### Send mail from template
+POST {{host}}/mails/AUTH-CHECK-MAIL/from-template
+Content-Type: application/json
+Authorization: {{token}}
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.version = environment.version;
-    this.year = new Date().getFullYear();
-  }
-</code></pre>
-<p>Add in html file:</p>
-<pre><code>&lt;p class=&quot;mb-1&quot;&gt;© {{ year }} AppName v.{{ version }}&lt;/p&gt;
+{
+    &quot;to&quot;:&quot;fruiz@grape.com.ar&quot;,
+    &quot;Identifier&quot;: &quot;Fernando Ruiz&quot;,
+    &quot;Link&quot;: 6
+}
 </code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../working/" class="btn btn-neutral float-left" title="Working"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../logs/" class="btn btn-neutral float-right" title="Logs">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../neox/" class="btn btn-neutral float-left" title="Neox deploy"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -195,10 +216,8 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../working/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../neox/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="../logs/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
