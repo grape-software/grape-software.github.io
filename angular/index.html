@@ -317,6 +317,34 @@ Hay que agregar en providers del/los módulos {provide: LOCALE_ID, useValue:'es'
     this.userSub.unsubscribe();
   }
 </code></pre>
+<h2 id="manejo-de-customizacion-de-componentes">Manejo de Customización de componentes</h2>
+<p>Para la customización de los componentes se utiliza la tabla TenantsComponents donde se guarda un JSON en value con la estructura de datos definida en el Typescript en Models CustomLOQUESEA referenciado para el TenantId y el nombre del componente de angular.</p>
+<p>Primero crear el modelo de datos en Models</p>
+<pre><code>export class CustomLOQUESEA {
+  atributo: string;
+}
+</code></pre>
+<p>En el componente se debe importar el servicio de customización (ConfComponenteService) y el modelo de datos (CustomLOQUESEA) y se debe inyectar en el constructor.</p>
+<pre><code>  custom: CustomLOQUESEA = new CustomLOQUESEA();
+  constructor(private confComponenteService: ConfComponenteService) {}
+</code></pre>
+<p>Luego se llama en ngOnInit al endpoint que obtiene la configuración del componente y se suscribe para obtener la respuesta.</p>
+<pre><code>  ngOnInit(): void {
+    this.confService.getConfig(this.helpers.getTenantId(), this.constructor.name).subscribe((r: any) =&gt; {
+      if (r) {
+        Object.assign(this.custom, r);
+      }
+    });
+  }
+
+</code></pre>
+<p>En la página HTML se debe utilizar el atributo custom para mostrar los datos que se obtuvieron del endpoint.</p>
+<pre><code>  {{
+    custom?.atributo
+      ? custom?.atributo
+      : 'Texto default si no se encuentra la configuración en la tabla TenantsComponents'
+  }}
+</code></pre>
               
             </div>
           </div><footer>
