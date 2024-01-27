@@ -8,7 +8,7 @@
     <title>Releasing - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
@@ -17,12 +17,13 @@
         var mkdocs_page_url = "/semantic-release/";
       </script>
     
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
-      <script>hljs.highlightAll();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -34,7 +35,7 @@
           <a href=".." class="icon icon-home"> Grape Docs
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -51,12 +52,6 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">Releasing</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#versioning">Versioning</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#net-versioning">NET Versioning</a>
-    </li>
-        </ul>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#project-specifications">Project specifications</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#c-backend-projects">C# backend projects</a>
@@ -67,7 +62,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../netcore/logs/">Logs</a>
+                <li class="toctree-l1"><a class="reference internal" href="../logs/">Logs</a>
                 </li>
               </ul>
               <ul>
@@ -83,7 +78,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../netcore/http-services/">External Services</a>
+                <li class="toctree-l1"><a class="reference internal" href="../http-services/">External Services</a>
                 </li>
               </ul>
               <ul>
@@ -95,7 +90,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../netcore/microservices/">Microservices</a>
+                <li class="toctree-l1"><a class="reference internal" href="../microservices/">Microservices</a>
                 </li>
               </ul>
               <ul>
@@ -126,10 +121,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../nginx_config_angular/">Nginx angular</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../netcore/versioning/">versionning</a>
-                </li>
-              </ul>
       </div>
     </div>
     </nav>
@@ -143,26 +134,18 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Releasing</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Releasing</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
   <hr/>
 </div>
+
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
                 <h1 id="grape-use-of-semantic-release">Grape use of Semantic Release</h1>
 <p>All developers should use this specifications.</p>
-<h2 id="versioning">Versioning</h2>
-<p>Important resource to read: https://semver.org/ to understand the versioning.
-For .NET it's recommended to read https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md</p>
-<p>Eeach project team should decide by themselves how to use the versioning for backend, frontend and mobile.</p>
-<h3 id="net-versioning">NET Versioning</h3>
-<p>https://github.com/Microsoft/api-guidelines/blob/master/Guidelines.md
-This document explains how to use the versioning for .NET projects.
-https://dateo-software.de/blog/web-api-versioning</p>
 <h2 id="project-specifications">Project specifications</h2>
 <h3 id="c-backend-projects">C# backend projects</h3>
 <p>In .csproj this code should be defined in <PropertyGroup></p>
@@ -197,7 +180,7 @@ https://dateo-software.de/blog/web-api-versioning</p>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../working/" class="btn btn-neutral float-left" title="Working"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../netcore/logs/" class="btn btn-neutral float-right" title="Logs">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../logs/" class="btn btn-neutral float-right" title="Logs">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -223,19 +206,18 @@ https://dateo-software.de/blog/web-api-versioning</p>
       <span><a href="../working/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../netcore/logs/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../logs/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "..";</script>
-    <script src="../js/theme_extra.js"></script>
-    <script src="../js/theme.js"></script>
-      <script src="../search/main.js"></script>
-    <script>
-        jQuery(function () {
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
-        });
+        };
     </script>
 
 </body>
