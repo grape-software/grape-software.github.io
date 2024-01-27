@@ -8,7 +8,7 @@
     <title>Powerbi - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
@@ -17,13 +17,12 @@
         var mkdocs_page_url = "/powerbi/";
       </script>
     
-    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -35,7 +34,7 @@
           <a href=".." class="icon icon-home"> Grape Docs
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -54,7 +53,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../logs/">Logs</a>
+                <li class="toctree-l1"><a class="reference internal" href="../netcore/logs/">Logs</a>
                 </li>
               </ul>
               <ul>
@@ -70,7 +69,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../http-services/">External Services</a>
+                <li class="toctree-l1"><a class="reference internal" href="../netcore/http-services/">External Services</a>
                 </li>
               </ul>
               <ul>
@@ -82,7 +81,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../microservices/">Microservices</a>
+                <li class="toctree-l1"><a class="reference internal" href="../netcore/microservices/">Microservices</a>
                 </li>
               </ul>
               <ul>
@@ -123,6 +122,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="../nginx_config_angular/">Nginx angular</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../netcore/versionning.md">versionning</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -136,13 +139,13 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Powerbi</li>
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Powerbi</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
@@ -171,8 +174,8 @@ El usuario con la cuenta pro debe tener establecido en roles de administrador:</
 <li>Administrador de Power Plataform</li>
 </ul>
 <h2 id="powerbi-cli">Powerbi cli</h2>
-<p>pbicli login --service-principal -p 25601d95-de48-4763-a36a-18df6f2805fb -s ZwE8Q~EEqhEjHLv88GCRP0m4Qsa2uQJVjH8BLaaD -t 465f9a2e-6e22-4169-938a-009fbbe36f1f
-pbicli report list --workspace 928fe4f4-2825-4162-8264-1410a653055f</p>
+<p>pbicli login --service-principal -p GUID -s SECRET -t TENANTID
+pbicli report list --workspace WORKSPACEID</p>
 <h2 id="change-database">Change database</h2>
 <p>https://community.powerbi.com/t5/Desktop/Power-BI-API-to-change-Database-dynamically/m-p/252013
 https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-dynamic-binding</p>
@@ -211,14 +214,15 @@ https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-dynamic-bind
     
   </span>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme_extra.js" defer></script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
-        };
+        });
     </script>
 
 </body>

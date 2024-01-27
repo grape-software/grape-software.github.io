@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/linter/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/migrations/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Linter Config - Grape Docs</title>
+    <title>C# Microservices Database Schema Consistency - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Linter Config";
-        var mkdocs_page_input_path = "linter.md";
-        var mkdocs_page_url = "/linter/";
+        var mkdocs_page_name = "C# Microservices Database Schema Consistency";
+        var mkdocs_page_input_path = "migrations.md";
+        var mkdocs_page_url = "/migrations/";
       </script>
     
     <!--[if lt IE 9]>
@@ -72,22 +72,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="../netcore/http-services/">External Services</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Linter Config</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#packages-devdependencies">Packages devDependencies</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#vscode-extensions">vscode extensions</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#vscode-settings">vscode settings</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#eslint-ignore">Eslint ignore</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#eslintrcjson">eslintrc.json</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#internacionalizacion">Internacionalización</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../linter/">Linter Config</a>
                 </li>
               </ul>
               <ul>
@@ -144,7 +130,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Linter Config</li>
+      <li class="breadcrumb-item active">C# Microservices Database Schema Consistency</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -153,105 +139,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="configuring-eslint-on-angular">Configuring ESLint on Angular</h1>
-<p>Test on A14 copiar los archivos o el contendido de la carpeta ESLint</p>
-<pre><code>ng add @angular-eslint/schematics
-ng g @angular-eslint/schematics:convert-tslint-to-eslint
+                <h1 id="c-microservices-database-schema-consistency">C# Microservices Database Schema Consistency</h1>
+<p>dotnet Entity Framework Core tools reference - .NET Core CLI needed
+https://learn.microsoft.com/en-us/ef/core/cli/dotnet</p>
+<pre><code>dotnet tool install --global dotnet-ef
 </code></pre>
-<p>copiar el directorio ESLint al directorio del proyecto</p>
-<h2 id="packages-devdependencies">Packages devDependencies</h2>
-<pre><code>@angular-eslint/builder
-@angular-eslint/eslint-plugin
-@angular-eslint/eslint-plugin-template
-@angular-eslint/schematics
-@angular-eslint/template-parser
-@typescript-eslint/eslint-plugin
-@typescript-eslint/parser
-eslint
-import-sort
-import-sort-cli
-import-sort-parser-typescript
-import-sort-style-module
+<h2 id="usefull-commands">Usefull commands</h2>
+<pre><code>dotnet ef migrations add InitialCreate
+dotnet ef database update
+dotnet ef migrations script --help
 </code></pre>
-<h2 id="vscode-extensions">vscode extensions</h2>
-<pre><code>{
-&quot;recommendations&quot;: [
-&quot;amatiasq.sort-imports&quot;,
-&quot;DSKWRK.vscode-generate-getter-setter&quot;,
-&quot;esbenp.prettier-vscode&quot;,
-&quot;johnpapa.vscode-peacock&quot;,
-&quot;ms-azuretools.vscode-docker&quot;,
-&quot;ms-vscode.vscode-typescript-tslint-plugin&quot;,
-&quot;PKief.material-icon-theme&quot;,
-&quot;expertly-simple.ng-evergreen&quot;,
-&quot;formulahendry.auto-close-tag&quot;,
-&quot;HookyQR.beautify&quot;,
-&quot;johnpapa.angular-essentials&quot;,
-&quot;msjsdiag.debugger-for-edge&quot;
-]
-}
+<h2 id="database-schema-consistency">Database Schema Consistency</h2>
+<p>When working with microservices, it is important to keep the database schema consistent across all services. This is because the database is shared between all services, and if one service is expecting a certain schema, and another service is expecting a different schema, then the database will be in an inconsistent state. This can lead to errors and data loss.</p>
+<h2 id="database-migrations-project">Database Migrations Project</h2>
+<p>To help keep the database schema consistent, we have created a database migrations project. This project contains all of the database migrations that are needed to keep the database schema consistent across all services. The database migrations project is located in the <code>src/DatabaseMigrations</code> folder.</p>
+<h3 id="steps-to-create-a-new-database-migration">Steps to Create a New Database Migration</h3>
+<p>To create a new database migration, follow these steps:
+- Create a C# Project
+- Add the <code>Microsoft.EntityFrameworkCore.Design</code> NuGet Package
+- Add the <code>Microsoft.EntityFrameworkCore.SqlServer</code> NuGet Package
+- Add the <code>Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite</code> NuGet Package
+- Add the <code>Microsoft.EntityFrameworkCore.Tools</code> NuGet Package</p>
+<pre><code>dotnet add package EFCore.NamingConventions
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite
 </code></pre>
-<h2 id="vscode-settings">vscode settings</h2>
-<p>´´´´
-{
-"debug.openExplorerOnEnd": true,
-"editor.tabSize": 2,
-"editor.rulers": [120],
-"editor.autoIndent": "full",
-"editor.cursorBlinking": "solid",
-"editor.formatOnType": false,
-"editor.formatOnPaste": false,
-"editor.formatOnSave": true,
-"editor.minimap.enabled": false,
-"editor.codeActionsOnSave": {
-"source.organizeImports": true,
-"source.fixAll.tslint": true
-},
-"editor.defaultFormatter": "esbenp.prettier-vscode",
-"[html]": {
-"editor.defaultFormatter": "esbenp.prettier-vscode"
-},
-"[typescript]": {
-"editor.defaultFormatter": "esbenp.prettier-vscode"
-},
-"explorer.openEditors.visible": 0,
-"files.trimTrailingWhitespace": true,
-"files.autoSave": "off",
-"git.confirmSync": false,
-"git.enableSmartCommit": true,
-"typescript.tsdk": "node_modules/typescript/lib",
-"workbench.iconTheme": "material-icon-theme",
-"auto-close-tag.SublimeText3Mode": true,
-"html.autoClosingTags": true,
-"ng-evergreen.upgradeChannel": "Latest"
-}</p>
-<p>´´´´</p>
-<h2 id="eslint-ignore">Eslint ignore</h2>
-<p>File .eslintignore
-´´´´
-node_modules
-dist
-´´´´</p>
-<h2 id="eslintrcjson">eslintrc.json</h2>
-<h2 id="internacionalizacion">Internacionalización</h2>
-<pre><code>ng add @angular/localize
+<h2 id="database-migrations">Database Migrations</h2>
+<p>Database migrations are used to update the database schema. They are used to add new tables, columns, indexes, etc. to the database. They are also used to update existing tables, columns, indexes, etc. to the database. Database migrations are used to keep the database schema consistent across all services.</p>
+<h2 id="database-migrations-project-structure">Database Migrations Project Structure</h2>
+<p>The database migrations project is structured as follows:</p>
+<pre><code>src/DatabaseMigrations
+├── DatabaseMigrations.csproj
+├── Migrations
+│   ├── 20210101000000_Initial.cs
+│   ├── 20210101000000_Initial.Designer.cs
+│   ├── 20210101000000_Initial.sql
+│   ├── 20210101000001_AddedColumn.cs
+│   ├── 20210101000001_AddedColumn.Designer.cs
+│   ├── 20210101000001_AddedColumn.sql
 </code></pre>
-<p>Agregar en angular.json</p>
-<pre><code>&quot;projects&quot;: {
-  &quot;my-angular-project&quot;: {
-    &quot;i18n&quot;: {
-      &quot;sourceLocale&quot;: &quot;es-AR&quot;
-    }
-  }
-}
-</code></pre>
+<p>The <code>DatabaseMigrations.csproj</code> file contains the project configuration. The <code>Migrations</code> folder contains all of the database migrations. Each database migration is a C# class that inherits from the <code>Migration</code> class. Each database migration has a <code>cs</code>, <code>Designer.cs</code>, and <code>sql</code> file. The <code>cs</code> file contains the C# code for the database migration. The <code>Designer.cs</code> file contains the C# code for the database migration. The <code>sql</code> file contains the SQL code for the database migration.</p>
+<h2 id="database-migrations-project-configuration">Database Migrations Project Configuration</h2>
+<p>T</p>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../netcore/http-services/" class="btn btn-neutral float-left" title="External Services"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../microfronts/" class="btn btn-neutral float-right" title="Microfronts">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -273,10 +205,6 @@ dist
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../netcore/http-services/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../microfronts/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
