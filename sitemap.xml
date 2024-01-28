@@ -6,66 +6,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://grape-software.github.io/angular/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/autocomplete/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/b4to5/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/environment-dev/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/linter/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/microfronts/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/migrations/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/ms-jobs/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/neox/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/nginx_config_angular/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/powerbi/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://grape-software.github.io/schema-compare/</loc>
-         <lastmod>2024-01-28</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://grape-software.github.io/semantic-release/</loc>
          <lastmod>2024-01-28</lastmod>
          <changefreq>daily</changefreq>
@@ -77,6 +17,61 @@
     </url>
     <url>
          <loc>https://grape-software.github.io/working/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/angular/angular/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/angular/autocomplete/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/angular/b4to5/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/angular/linter/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/angular/microfronts/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/data/migrations/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/data/powerbi/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/data/schema-compare/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/deploys/environment-dev/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/deploys/neox/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/deploys/nginx_config_angular/</loc>
          <lastmod>2024-01-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -97,6 +92,11 @@
     </url>
     <url>
          <loc>https://grape-software.github.io/netcore/microservices/</loc>
+         <lastmod>2024-01-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://grape-software.github.io/netcore/ms-jobs/</loc>
          <lastmod>2024-01-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
