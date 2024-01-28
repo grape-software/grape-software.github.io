@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/ms-jobs/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Fernando Ruiz" /><link rel="canonical" href="https://grape-software.github.io/migrations/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Microservicio Jobs - Grape Docs</title>
+    <title>C# Microservices Database Schema Consistency - Grape Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Microservicio Jobs";
-        var mkdocs_page_input_path = "ms-jobs.md";
-        var mkdocs_page_url = "/ms-jobs/";
+        var mkdocs_page_name = "C# Microservices Database Schema Consistency";
+        var mkdocs_page_input_path = "migrations.md";
+        var mkdocs_page_url = "/migrations/";
       </script>
     
     <!--[if lt IE 9]>
@@ -104,18 +104,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="../neox/">Neox deploy</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Microservicio Jobs</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#templates">Templates</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#insertar-un-nuevo-template">Insertar un nuevo template</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#envio-de-mails">Envío de mails</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ms-jobs/">Microservicio Jobs</a>
                 </li>
               </ul>
               <ul>
@@ -144,7 +134,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Microservicio Jobs</li>
+      <li class="breadcrumb-item active">C# Microservices Database Schema Consistency</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -153,64 +143,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="uso-del-microservicio-jobs-y-templates">Uso del microservicio Jobs y templates</h1>
-<p>El microservicio Jobs tiene los siguientes servicio:</p>
-<ul>
-<li>RabitMQ como bus para encolar tareas largas y convertirlas en asyncronicas</li>
-<li>SignalR para notificar a los usuarios sobre la finalización de las tareas y como mensajería</li>
-<li>Database para administrar los templates y los logs de interacción</li>
-</ul>
-<h2 id="templates">Templates</h2>
-<p>Los templates se guardan en la base en la tabla Templates permiten definir desde el formato para el armado de un PDF hasta el envío de notificaciones por distintos canales: mails, sms, etc.</p>
-<p>Este es un ejemplo para insertar un template que permite la configuración del envío de mails. El JsonDirective es un JSON con una interface que se usa depende del tipo de template que sea.
-Para el caso de los mails tiene la configuración de con que se envían los mails, los datos estáticos que se enviaran por mail y los parámetros a ser reemplazados en tiempo de ejecución.
-Para el envío hay un endpoint que permite indicarle cuál es el template (TemplateId) y cuales son los datos a ser reemplazados (diccionario con mapping con el objeto y donde va en el texto).
-De esta forma cuando alguien quiera enviar un mail deberá inserta in registro en la base de datos con un nuevo TempateId y llamar al endpoint con los datos del objeto que serán reempalzados.</p>
-<h3 id="insertar-un-nuevo-template">Insertar un nuevo template</h3>
-<p>Ejemplo para insertar en la base</p>
-<pre><code>insert into templates (TemplateId, JsonDirective, [Module], Active )
-values ('AUTH-CHECK-MAIL','{
-    &quot;MailSettings&quot;: {
-        &quot;MailServer&quot;: &quot;email-smtp.us-east-1.amazonaws.com&quot;,
-        &quot;MailPort&quot;: 587,
-        &quot;Password&quot;: &quot;&quot;,
-        &quot;UserName&quot;: &quot;AKIASK5SMKGUXLBRWIAB&quot;,
-        &quot;SenderName&quot;: &quot;GRAPE - Verificar Email&quot;,
-        &quot;Sender&quot;: &quot;transaccional@grape.com.ar&quot;,
-        &quot;EnableSsl&quot;: true
-    },
-    &quot;MailMessage&quot;: {
-        &quot;Subject&quot;: &quot;Verificación de Email&quot;,
-        &quot;IsBodyHtml&quot;: true,
-        &quot;Body&quot;: &quot;Estimado / a @identifier hemos generado un link para que verifique su Email &lt; a href=@link&gt;@link&lt;/a&gt;.&quot;
-    },
-    &quot;MailParameters&quot;: {
-        &quot;@identifier&quot;: &quot;Identifier&quot;,
-        &quot;@link&quot;: &quot;Link&quot;
-    }
-}','AUTH',1)
+                <h1 id="c-microservices-database-schema-consistency">C# Microservices Database Schema Consistency</h1>
+<p>dotnet Entity Framework Core tools reference - .NET Core CLI needed
+https://learn.microsoft.com/en-us/ef/core/cli/dotnet</p>
+<pre><code>dotnet tool install --global dotnet-ef
 </code></pre>
-<h2 id="envio-de-mails">Envío de mails</h2>
-<p>El envío de mails se realiza llamando al endpoint POST /api/jobs/{TempplateId}/from-template con el objeto a ser reemplazado en el BODY
-Ejemplo de llamada para el envío de mail</p>
-<pre><code>### Send mail from template
-POST {{host}}/mails/AUTH-CHECK-MAIL/from-template
-Content-Type: application/json
-Authorization: {{token}}
-
-{
-    &quot;to&quot;:&quot;fruiz@grape.com.ar&quot;,
-    &quot;Identifier&quot;: &quot;Fernando Ruiz&quot;,
-    &quot;Link&quot;: 6
-}
+<h2 id="usefull-commands">Usefull commands</h2>
+<pre><code>dotnet ef migrations add InitialCreate
+dotnet ef database update
+dotnet ef migrations script --help
 </code></pre>
+<h2 id="database-schema-consistency">Database Schema Consistency</h2>
+<p>When working with microservices, it is important to keep the database schema consistent across all services. This is because the database is shared between all services, and if one service is expecting a certain schema, and another service is expecting a different schema, then the database will be in an inconsistent state. This can lead to errors and data loss.</p>
+<h2 id="database-migrations-project">Database Migrations Project</h2>
+<p>To help keep the database schema consistent, we have created a database migrations project. This project contains all of the database migrations that are needed to keep the database schema consistent across all services. The database migrations project is located in the <code>src/DatabaseMigrations</code> folder.</p>
+<h3 id="steps-to-create-a-new-database-migration">Steps to Create a New Database Migration</h3>
+<p>To create a new database migration, follow these steps:
+- Create a C# Project
+- Add the <code>Microsoft.EntityFrameworkCore.Design</code> NuGet Package
+- Add the <code>Microsoft.EntityFrameworkCore.SqlServer</code> NuGet Package
+- Add the <code>Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite</code> NuGet Package
+- Add the <code>Microsoft.EntityFrameworkCore.Tools</code> NuGet Package</p>
+<pre><code>dotnet add package EFCore.NamingConventions
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite
+</code></pre>
+<h2 id="database-migrations">Database Migrations</h2>
+<p>Database migrations are used to update the database schema. They are used to add new tables, columns, indexes, etc. to the database. They are also used to update existing tables, columns, indexes, etc. to the database. Database migrations are used to keep the database schema consistent across all services.</p>
+<h2 id="database-migrations-project-structure">Database Migrations Project Structure</h2>
+<p>The database migrations project is structured as follows:</p>
+<pre><code>src/DatabaseMigrations
+├── DatabaseMigrations.csproj
+├── Migrations
+│   ├── 20210101000000_Initial.cs
+│   ├── 20210101000000_Initial.Designer.cs
+│   ├── 20210101000000_Initial.sql
+│   ├── 20210101000001_AddedColumn.cs
+│   ├── 20210101000001_AddedColumn.Designer.cs
+│   ├── 20210101000001_AddedColumn.sql
+</code></pre>
+<p>The <code>DatabaseMigrations.csproj</code> file contains the project configuration. The <code>Migrations</code> folder contains all of the database migrations. Each database migration is a C# class that inherits from the <code>Migration</code> class. Each database migration has a <code>cs</code>, <code>Designer.cs</code>, and <code>sql</code> file. The <code>cs</code> file contains the C# code for the database migration. The <code>Designer.cs</code> file contains the C# code for the database migration. The <code>sql</code> file contains the SQL code for the database migration.</p>
+<h2 id="database-migrations-project-configuration">Database Migrations Project Configuration</h2>
+<p>T</p>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../neox/" class="btn btn-neutral float-left" title="Neox deploy"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../nginx_config_angular/" class="btn btn-neutral float-right" title="Nginx angular">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -232,10 +209,6 @@ Authorization: {{token}}
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../neox/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../nginx_config_angular/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
